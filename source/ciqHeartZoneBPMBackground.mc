@@ -19,8 +19,7 @@ class Background extends Ui.Drawable {
     }
 
     function draw(dc) {
-//        dc.setColor(Gfx.COLOR_TRANSPARENT, mColor);
-        dc.setColor(Gfx.COLOR_TRANSPARENT, Gfx.COLOR_RED);
+        dc.setColor(Gfx.COLOR_TRANSPARENT, mColor);
         dc.clear();
     }
 
