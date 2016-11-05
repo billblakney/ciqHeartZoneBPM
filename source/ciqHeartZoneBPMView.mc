@@ -4,6 +4,30 @@ using Toybox.System as Sys;
 
 class ciqHeartZoneBPMView extends Ui.DataField
 {
+   const LAYOUT_RUNNER_ALL             = "runnerAll";
+   const LAYOUT_RUNNER_TOP_HALF        = "runnerTopHalf";
+   const LAYOUT_RUNNER_BOT_HALF        = "runnerBotHalf";
+   const LAYOUT_RUNNER_TOP_THIRD       = "runnerTopThird";
+   const LAYOUT_RUNNER_MID_THIRD       = "runnerMidThird";
+   const LAYOUT_RUNNER_BOT_THIRD       = "runnerBotThird";
+   const LAYOUT_RUNNER_LEFT_MID_THIRD  = "runnerLeftMidThird";
+   const LAYOUT_RUNNER_RIGHT_MID_THIRD = "runnerRightMidThird";
+   const LAYOUT_RUNNER_UNKNOWN         = "runnerUnknown";
+
+   const LAYOUT_FENIX_ALL = "fenixAll";
+   const LAYOUT_FENIX_TOP_HALF        = "fenixTopHalf";
+   const LAYOUT_FENIX_BOT_HALF        = "fenixBotHalf";
+   const LAYOUT_FENIX_TOP_THIRD       = "fenixTopThird";
+   const LAYOUT_FENIX_MID_THIRD       = "fenixMidThird";
+   const LAYOUT_FENIX_BOT_THIRD       = "fenixBotThird";
+   const LAYOUT_FENIX_LEFT_MID_THIRD  = "fenixLeftMidThird";
+   const LAYOUT_FENIX_RIGHT_MID_THIRD = "fenixRightMidThird";
+   const LAYOUT_FENIX_TOP_LEFT_QUAD   = "fenixTopLeftQuad";
+   const LAYOUT_FENIX_TOP_RIGHT_QUAD  = "fenixTopRightQuad";
+   const LAYOUT_FENIX_BOT_LEFT_QUAD   = "fenixBotLeftQuad";
+   const LAYOUT_FENIX_BOT_RIGHT_QUAD  = "fenixBotRightQuad";
+   const LAYOUT_FENIX_UNKNOWN         = "fenixUnknown";
+
    const UNOBSCURED         = 0;  // 0000
    const OBSCURED_LEFT      = 1;  // 0001
    const OBSCURED_RIGHT     = 4;  // 0100
@@ -30,137 +54,6 @@ class ciqHeartZoneBPMView extends Ui.DataField
 
    function printFontDims(fontName,dimX,dimY) {
 //         Sys.println(fontName + " dims: " + dimX + "," + dimY);
-   }
-
-   /*
-   ************************
-   forerunner layouts
-   ------------------------
-   all: 215,180 tbLR       = 1
-   ------------------------
-   topHalf: 215, 89 tLR    = 2
-   botHalf: 215, 89 bLR    = 3
-   ------------------------
-   topThird: 215, 55 tLR   = 4
-   midThird: 215, 66 LR    = 5
-   botThird: 215, 55 bLR   = 6
-   ------------------------
-   topThird:  215, 55 tLR
-   lMidThird: 107, 66 L    = 7
-   rMidThird: 107, 66 R    = 8
-   botThird:  215, 55 bLR
-   ------------------------
-
-   ************************
-   fenix/bravo layouts
-   ------------------------
-   all:       218,218 tbLR = 1
-   ------------------------
-   topHalf:   218,108 tLR  = 2
-   botHalf:   218,108 bLR  = 3
-   ------------------------
-   topThird:  218, 70 tLR  = 4
-   midThird:  218, 74 LR   = 5
-   botThird:  218, 70 bLR  = 6
-   ------------------------
-   topHalf:   218,108 tLR
-   blQuad:    108,108 bL   = 9
-   brQuad:    108,108 bR   = 10
-   ------------------------
-   topThird:  218, 70 tLR
-   lMidThird: 108, 74 L    = 11
-   rMidThird: 108, 74 R    = 12
-   botThird:  218, 70 bLR
-   ------------------------
-   tlQuad:    108,108 tL   = 7
-   trQuad:    108,108 tR   = 8
-   blQuad:    108,108 bL
-   brQuad:    108,108 bR
-   ------------------------
-   */
- 
-   function getLayoutName(screenWidth,screenHeight,width,height,obscurity)
-   {
-      var model = "unknown";
-      
-      if (screenWidth == 215 && screenHeight == 180 ) {
-
-         model = "runner";
-         
-         if (obscurity == OBSCURED_ALL) {
-            model += "All";
-         }
-         else if (obscurity == OBSCURED_TOP_LR && height == 89) {
-            model += "TopHalf";
-         }
-         else if (obscurity == OBSCURED_BOT_LR && height == 89) {
-            model += "BotHalf";
-         }
-         else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
-            model += "TopThird";
-         }
-         else if (obscurity == OBSCURED_LR) {
-            model += "MidThird";
-         }
-         else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
-            model += "BotThird";
-         }
-         else if (obscurity == OBSCURED_LEFT) {
-            model += "LeftMidThird";
-         }
-         else if (obscurity == OBSCURED_RIGHT) {
-            model += "RightMidThird";
-         }
-         else {
-            model += "unknown";
-         }
-      }
-      else if (screenWidth == 218 && screenHeight == 218 ) {
-
-         model = "fenix";
-
-         if (obscurity == OBSCURED_ALL) {
-            model += "All";
-         }
-         else if (obscurity == OBSCURED_TOP_LR && height == 108) {
-            model += "TopHalf";
-         }
-         else if (obscurity == OBSCURED_BOT_LR && height == 108) {
-            model += "BotHalf";
-         }
-         else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
-            model += "TopThird";
-         }
-         else if (obscurity == OBSCURED_LR) {
-            model += "MidThird";
-         }
-         else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
-            model += "BotThird";
-         }
-         else if (obscurity == OBSCURED_LEFT) {
-            model += "LeftMidThird";
-         }
-         else if (obscurity == OBSCURED_RIGHT) {
-            model += "RightMidThird";
-         }
-         else if (obscurity == OBSCURED_TOP_LEFT) {
-            model += "TopLeftQuad";
-         }
-         else if (obscurity == OBSCURED_TOP_RIGHT) {
-            model += "TopRightQuad";
-         }
-         else if (obscurity == OBSCURED_BOT_LEFT) {
-            model += "BotLeftQuad";
-         }
-         else if (obscurity == OBSCURED_BOT_RIGHT) {
-            model += "BotRightQuad";
-         }
-         else {
-            model += "unknown";
-         }
-      }
-      
-      return model;
    }
 
    // Set your layout here. Anytime the size of obscurity of
@@ -283,7 +176,169 @@ class ciqHeartZoneBPMView extends Ui.DataField
 
       return true;
    }
+
+    // The given info object contains all the current workout
+    // information. Calculate a value and save it locally in this method.
+    function compute(info) {
+        // See Activity.Info in the documentation for available information.
+        if(info has :currentHeartRate){
+            if(info.currentHeartRate != null){
+                mValue = info.currentHeartRate;
+            } else {
+                mValue = 0.0f;
+            }
+        }
+    }
+
+    // Display the value you computed here. This will be called
+    // once a second when the data field is visible.
+    function onUpdate(dc) {
+        // Set the background color
+        View.findDrawableById("Background").setColor(getBackgroundColor());
+
+        // Set the foreground color and value
+        var value = View.findDrawableById("value");
+        if (getBackgroundColor() == Gfx.COLOR_BLACK) {
+            value.setColor(Gfx.COLOR_WHITE);
+        } else {
+            value.setColor(Gfx.COLOR_BLACK);
+        }
+        value.setText(mValue.format("%.2f"));
+
+        // Call parent's onUpdate(dc) to redraw the layout
+        View.onUpdate(dc);
+    }
+
+   /*
+   ************************
+   forerunner layouts
+   ------------------------
+   all: 215,180 tbLR       = 1
+   ------------------------
+   topHalf: 215, 89 tLR    = 2
+   botHalf: 215, 89 bLR    = 3
+   ------------------------
+   topThird: 215, 55 tLR   = 4
+   midThird: 215, 66 LR    = 5
+   botThird: 215, 55 bLR   = 6
+   ------------------------
+   topThird:  215, 55 tLR
+   lMidThird: 107, 66 L    = 7
+   rMidThird: 107, 66 R    = 8
+   botThird:  215, 55 bLR
+   ------------------------
+
+   ************************
+   fenix/bravo layouts
+   ------------------------
+   all:       218,218 tbLR = 1
+   ------------------------
+   topHalf:   218,108 tLR  = 2
+   botHalf:   218,108 bLR  = 3
+   ------------------------
+   topThird:  218, 70 tLR  = 4
+   midThird:  218, 74 LR   = 5
+   botThird:  218, 70 bLR  = 6
+   ------------------------
+   topHalf:   218,108 tLR
+   blQuad:    108,108 bL   = 9
+   brQuad:    108,108 bR   = 10
+   ------------------------
+   topThird:  218, 70 tLR
+   lMidThird: 108, 74 L    = 11
+   rMidThird: 108, 74 R    = 12
+   botThird:  218, 70 bLR
+   ------------------------
+   tlQuad:    108,108 tL   = 7
+   trQuad:    108,108 tR   = 8
+   blQuad:    108,108 bL
+   brQuad:    108,108 bR
+   ------------------------
+   */
+ 
+   function getLayoutName(screenWidth,screenHeight,width,height,obscurity)
+   {
+      var model = "unknown";
+      
+      if (screenWidth == 215 && screenHeight == 180 ) {
+
+         model = "runner";
+         
+         if (obscurity == OBSCURED_ALL) {
+            model = LAYOUT_RUNNER_ALL;
+         }
+         else if (obscurity == OBSCURED_TOP_LR && height == 89) {
+            model = LAYOUT_RUNNER_TOP_HALF;
+         }
+         else if (obscurity == OBSCURED_BOT_LR && height == 89) {
+            model = LAYOUT_RUNNER_BOT_HALF;
+         }
+         else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
+            model = LAYOUT_RUNNER_TOP_THIRD;
+         }
+         else if (obscurity == OBSCURED_LR) {
+            model = LAYOUT_RUNNER_MID_THIRD;
+         }
+         else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
+            model = LAYOUT_RUNNER_BOT_THIRD;
+         }
+         else if (obscurity == OBSCURED_LEFT) {
+            model = LAYOUT_RUNNER_LEFT_MID_THIRD;
+         }
+         else if (obscurity == OBSCURED_RIGHT) {
+            model = LAYOUT_RUNNER_RIGHT_MID_THIRD;
+         }
+         else {
+            model = LAYOUT_RUNNER_UNKNOWN;
+         }
+      }
+      else if (screenWidth == 218 && screenHeight == 218 ) {
+
+         if (obscurity == OBSCURED_ALL) {
+            model = LAYOUT_FENIX_ALL;
+         }
+         else if (obscurity == OBSCURED_TOP_LR && height == 108) {
+            model = LAYOUT_FENIX_TOP_HALF;
+         }
+         else if (obscurity == OBSCURED_BOT_LR && height == 108) {
+            model = LAYOUT_FENIX_BOT_HALF;
+         }
+         else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
+            model = LAYOUT_FENIX_TOP_THIRD;
+         }
+         else if (obscurity == OBSCURED_LR) {
+            model = LAYOUT_FENIX_MID_THIRD;
+         }
+         else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
+            model = LAYOUT_FENIX_BOT_THIRD;
+         }
+         else if (obscurity == OBSCURED_LEFT) {
+            model = LAYOUT_FENIX_LEFT_MID_THIRD;
+         }
+         else if (obscurity == OBSCURED_RIGHT) {
+            model = LAYOUT_FENIX_RIGHT_MID_THIRD ;
+         }
+         else if (obscurity == OBSCURED_TOP_LEFT) {
+            model = LAYOUT_FENIX_TOP_LEFT_QUAD;
+         }
+         else if (obscurity == OBSCURED_TOP_RIGHT) {
+            model = LAYOUT_FENIX_TOP_RIGHT_QUAD;
+         }
+         else if (obscurity == OBSCURED_BOT_LEFT) {
+            model = LAYOUT_FENIX_BOT_LEFT_QUAD;
+         }
+         else if (obscurity == OBSCURED_BOT_RIGHT) {
+            model = LAYOUT_FENIX_BOT_RIGHT_QUAD;
+         }
+         else {
+            model = LAYOUT_FENIX_UNKNOWN;
+         }
+      }
+      
+      return model;
+   }
    
+   //TODO deprecate
    function getObscurityString(obscurityFlags)
    {
       var obscurity = "unknown";
@@ -338,37 +393,4 @@ class ciqHeartZoneBPMView extends Ui.DataField
       
       return obscurity;
    }
-
-    // The given info object contains all the current workout
-    // information. Calculate a value and save it locally in this method.
-    function compute(info) {
-        // See Activity.Info in the documentation for available information.
-        if(info has :currentHeartRate){
-            if(info.currentHeartRate != null){
-                mValue = info.currentHeartRate;
-            } else {
-                mValue = 0.0f;
-            }
-        }
-    }
-
-    // Display the value you computed here. This will be called
-    // once a second when the data field is visible.
-    function onUpdate(dc) {
-        // Set the background color
-        View.findDrawableById("Background").setColor(getBackgroundColor());
-
-        // Set the foreground color and value
-        var value = View.findDrawableById("value");
-        if (getBackgroundColor() == Gfx.COLOR_BLACK) {
-            value.setColor(Gfx.COLOR_WHITE);
-        } else {
-            value.setColor(Gfx.COLOR_BLACK);
-        }
-        value.setText(mValue.format("%.2f"));
-
-        // Call parent's onUpdate(dc) to redraw the layout
-        View.onUpdate(dc);
-    }
-
 }
