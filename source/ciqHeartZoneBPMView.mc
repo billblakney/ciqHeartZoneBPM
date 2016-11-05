@@ -33,28 +33,28 @@ class ciqHeartZoneBPMView extends Ui.DataField {
 
       var font = Gfx.FONT_NUMBER_MILD;
 
-      // Top left quadrant so we'll use the top left layout
-      if (obscurityFlags == (OBSCURE_TOP & OBSCURE_LEFT)) {
-         Sys.println("using TopLeft layout " + width + "," + height + "," + obscurityFlags);
-         View.setLayout(Rez.Layouts.TopLeftLayout(dc));
-
-         // Top right quadrant so we'll use the top right layout
-      } else if (obscurityFlags == (OBSCURE_TOP | OBSCURE_RIGHT)) {
-         Sys.println("using TopRight layout " + width + "," + height + "," + obscurityFlags);
-         View.setLayout(Rez.Layouts.TopRightLayout(dc));
-
-         // Bottom left quadrant so we'll use the bottom left layout
-      } else if (obscurityFlags == (OBSCURE_BOTTOM | OBSCURE_LEFT)) {
-         Sys.println("using BottomLeft layout " + width + "," + height + "," + obscurityFlags);
-         View.setLayout(Rez.Layouts.BottomLeftLayout(dc));
-
-         // Bottom right quadrant so we'll use the bottom right layout
-      } else if (obscurityFlags == (OBSCURE_BOTTOM | OBSCURE_RIGHT)) {
-         //            Sys.println("using BottomRight layout " + width + "," + height + "," + obscurityFlags);
-         View.setLayout(Rez.Layouts.BottomRightLayout(dc));
-
-         // Use the generic, centered layout
-      } else {
+//      // Top left quadrant so we'll use the top left layout
+//      if (obscurityFlags == (OBSCURE_TOP & OBSCURE_LEFT)) {
+////         Sys.println("using TopLeft layout " + width + "," + height + "," + obscurityFlags);
+//         View.setLayout(Rez.Layouts.TopLeftLayout(dc));
+//
+//         // Top right quadrant so we'll use the top right layout
+//      } else if (obscurityFlags == (OBSCURE_TOP | OBSCURE_RIGHT)) {
+////         Sys.println("using TopRight layout " + width + "," + height + "," + obscurityFlags);
+//         View.setLayout(Rez.Layouts.TopRightLayout(dc));
+//
+//         // Bottom left quadrant so we'll use the bottom left layout
+//      } else if (obscurityFlags == (OBSCURE_BOTTOM | OBSCURE_LEFT)) {
+////         Sys.println("using BottomLeft layout " + width + "," + height + "," + obscurityFlags);
+//         View.setLayout(Rez.Layouts.BottomLeftLayout(dc));
+//
+//         // Bottom right quadrant so we'll use the bottom right layout
+//      } else if (obscurityFlags == (OBSCURE_BOTTOM | OBSCURE_RIGHT)) {
+////         Sys.println("using BottomRight layout " + width + "," + height + "," + obscurityFlags);
+//         View.setLayout(Rez.Layouts.BottomRightLayout(dc));
+//
+//         // Use the generic, centered layout
+//      } else {
 //         Sys.println("----------> using Main layout " + width + "," + height + "," + obscurityFlags);
          var dims;
          var fontIsSet = false;
@@ -118,7 +118,7 @@ class ciqHeartZoneBPMView extends Ui.DataField {
           * on the center.
           */
          valueView.locY = height/2 - Gfx.getFontHeight(font)/2;
-      }
+//      }
 
       View.findDrawableById("label").setText(Rez.Strings.label);
 
