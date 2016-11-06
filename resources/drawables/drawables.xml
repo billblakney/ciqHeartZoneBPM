@@ -5,7 +5,7 @@
     <shape type="circle" x="30" y="10" radius="50" color="Gfx.COLOR_BLACK" />
   </drawable-list>
   <drawable-list id="Halfy" background="Gfx.COLOR_YELLOW">
-    <shape type="circle" x="100" y="100" radius="20" color="Gfx.COLOR_BLUE" />
-    <shape type="circle" x="30" y="10" radius="50" color="Gfx.COLOR_BLUE" />
+    <shape type="circle" x="108" y="0" radius="90" color="Gfx.COLOR_BLUE" />
+    <shape type="rectangle" x="0" y="90-18" width="215" height="18" color="Gfx.COLOR_GREEN" />
   </drawable-list>
 </drawables>

@@ -11,8 +11,8 @@
         <label id="value" x="center" y="22" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
     </layout>
     <layout id="frBotHalf">
-        <drawable id="Halfy" />
         <drawable class="Background" />
+        <drawable id="Halfy" />
         <label id="value" x="center" y="5" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
     </layout>
     <layout id="MainLayout">
