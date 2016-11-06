@@ -291,42 +291,41 @@ font = Gfx.FONT_NUMBER_HOT;
     *------------------------------------------------------------------------*/
     function onUpdate(dc)
     {
+hiliteZone = 6;
        var zone = getZone(mHeartRate);
 
        var zoneBgColor = getZoneBgColor(zone);
        var zoneFgColor = getZoneFgColor(zone);
-       
-//       Sys.println("zone,bg,fg: "
-//             + zone + "," + zoneBgColor + "," + zoneFgColor);
 
+       //Sys.println("zone,bg,fg: "
+       //   + zone + "," + zoneBgColor + "," + zoneFgColor);
+
+       /*
+        * Draw backdrop.
+        */
        var background = View.findDrawableById("Background");
-       background.setBackColor(Gfx.COLOR_WHITE);
-       background.setBorderColor(Gfx.COLOR_PURPLE);
+       background.setBorderColor(zoneBgColor);
+       background.setBackColor(zoneBgColor);
+
+       /*
+        * Draw the heart rate.
+        */
+       var value = View.findDrawableById("value");
+       value.setColor(zoneFgColor);
+       //        value.setText(mHeartRate.format("%2f"));
+       value.setText(toStr(mHeartRate));
+
+       /*
+        * If below the hilite zone, fill with the default bg color,
+        * and draw text with default fg color.
+        */
+       if (zone < hiliteZone) {
+          background.setBackColor(defaultBgColor);
+          value.setColor(defaultFgColor);
+       }
+
        background.draw(dc);
-        
-//       var circle_data = View.findDrawableById("circle_data");
-//       dc.setColor(defaultFgColor,defaultBgColor);
-//       dc.drawCircle(circle_data.locX,circle_data.locY,circle_data.width);
-
-//        var border = View.findDrawableById("FullCircle");
-//       Sys.println("FullCircle: " + border);
-//       dc.setColor(Gfx.COLOR_DK_RED,Gfx.COLOR_DK_RED);
-//       border.draw(dc);
-
-        // Get the value field and set it's foreground color and text
-        var value = View.findDrawableById("value");
-//        value.setColor(zoneFgColor);
-        value.setColor(Gfx.COLOR_BLACK);
-//        dc.setColor(zoneFgColor,Gfx.COLOR_TRANSPARENT);
-//        value.setText(mHeartRate.format("%2f"));
-        value.setText(toStr(mHeartRate));
-        value.draw(dc);
-        
-
-        // Call parent's onUpdate(dc) to redraw the layout
-/*
-        View.onUpdate(dc);
-*/
+       value.draw(dc);
     }
 
    /*-------------------------------------------------------------------------
