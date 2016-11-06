@@ -9,8 +9,11 @@
         <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_THAI_HOT" />
     </layout>
     <layout id="frTopHalf">
-        <drawable id="Halfy" />
-        <drawable class="Background" />
+        <drawable id="Background" class="Background" >
+        	<param name="center_x">107</param>
+        	<param name="center_y">90</param>
+        	<param name="radius">90</param>
+        </drawable>
         <label id="value" x="center" y="22" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
     </layout>
     <layout id="frBotHalf">
