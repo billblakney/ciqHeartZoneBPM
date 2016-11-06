@@ -202,62 +202,71 @@ class ciqHeartZoneBPMView extends Ui.DataField
       
       Sys.println("layout: " + layout);
       
-var font = Gfx.FONT_NUMBER_THAI_HOT;
-
       if (layout == LAYOUT_FR_ALL) {
          View.setLayout(Rez.Layouts.frAll(dc));
-var font = Gfx.FONT_NUMBER_THAI_HOT;
       }
       else if (layout == LAYOUT_FR_TOP_HALF) {
          View.setLayout(Rez.Layouts.frTopHalf(dc));
-font = Gfx.FONT_NUMBER_HOT;
       }
       else if (layout == LAYOUT_FR_BOT_HALF) {
          View.setLayout(Rez.Layouts.frBotHalf(dc));
-font = Gfx.FONT_NUMBER_HOT;
+      }
+      else if (layout == LAYOUT_FR_TOP_THIRD) {
+         View.setLayout(Rez.Layouts.frTopThird(dc));
+      }
+      else if (layout == LAYOUT_FR_MID_THIRD) {
+         View.setLayout(Rez.Layouts.frMidThird(dc));
+      }
+      else if (layout == LAYOUT_FR_BOT_THIRD) {
+         View.setLayout(Rez.Layouts.frBotThird(dc));
+      }
+      else if (layout == LAYOUT_FR_LEFT_MID_THIRD) {
+         View.setLayout(Rez.Layouts.frLeftMidThird(dc));
+      }
+      else if (layout == LAYOUT_FR_RIGHT_MID_THIRD) {
+         View.setLayout(Rez.Layouts.frRightMidThird(dc));
       }
       else {
          View.setLayout(Rez.Layouts.frAll(dc));
-font = Gfx.FONT_NUMBER_HOT;
       }
 
+/*
       var dims;
       var fontIsSet = false;
       var debugUsingFont = true;
 
       dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_THAI_HOT);
-//      printFontDims("thai hot",dims[0],dims[1]);
-      if (dims[0] < width && dims[1] < height) {
-         font = Gfx.FONT_NUMBER_THAI_HOT;
-         fontIsSet = true;
-//         if (debugUsingFont) { Sys.println("using thai hot"); }
-      }
+      printFontDims("thai hot",dims[0],dims[1]);
+//      if (dims[0] < width && dims[1] < height) {
+//         font = Gfx.FONT_NUMBER_THAI_HOT;
+//         fontIsSet = true;
+////         if (debugUsingFont) { Sys.println("using thai hot"); }
+//      }
 
       dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_HOT);
-//      printFontDims("hot",dims[0],dims[1]);
-      if (!fontIsSet && dims[0] < width && dims[1] < height) {
-         font = Gfx.FONT_NUMBER_HOT;
-         fontIsSet = true;
-//         if (debugUsingFont) { Sys.println("using hot"); }
-      }
+      printFontDims("hot",dims[0],dims[1]);
+//      if (!fontIsSet && dims[0] < width && dims[1] < height) {
+//         font = Gfx.FONT_NUMBER_HOT;
+//         fontIsSet = true;
+////         if (debugUsingFont) { Sys.println("using hot"); }
+//      }
 
       dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_MEDIUM);
-//      printFontDims("medium",dims[0],dims[1]);
-      if (!fontIsSet && dims[0] < width && dims[1] < height) {
-         font = Gfx.FONT_NUMBER_MEDIUM;
-         fontIsSet = true;
-//         if (debugUsingFont) { Sys.println("using medium"); }
-      }
+      printFontDims("medium",dims[0],dims[1]);
+//      if (!fontIsSet && dims[0] < width && dims[1] < height) {
+//         font = Gfx.FONT_NUMBER_MEDIUM;
+//         fontIsSet = true;
+////         if (debugUsingFont) { Sys.println("using medium"); }
+//      }
 
       dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_MILD);
       printFontDims("mild",dims[0],dims[1]);
-      if (!fontIsSet) {
-         font = Gfx.FONT_NUMBER_MILD;
-         fontIsSet = true;
-         if (debugUsingFont) { Sys.println("using low");
-         }
-      }
-/*
+//      if (!fontIsSet) {
+//         font = Gfx.FONT_NUMBER_MILD;
+//         fontIsSet = true;
+//         if (debugUsingFont) { Sys.println("using low");
+//         }
+//      }
  */
 
       var valueView = View.findDrawableById("value");
