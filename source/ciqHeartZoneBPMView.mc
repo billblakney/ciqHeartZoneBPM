@@ -5,30 +5,33 @@ using Toybox.UserProfile as Profile;
 
 class ciqHeartZoneBPMView extends Ui.DataField
 {
-   const LAYOUT_RUNNER_ALL             = "frAll";
-   const LAYOUT_RUNNER_TOP_HALF        = "frTopHalf";
-   const LAYOUT_RUNNER_BOT_HALF        = "frBotHalf";
-   const LAYOUT_RUNNER_TOP_THIRD       = "frTopThird";
-   const LAYOUT_RUNNER_MID_THIRD       = "frMidThird";
-   const LAYOUT_RUNNER_BOT_THIRD       = "frBotThird";
-   const LAYOUT_RUNNER_LEFT_MID_THIRD  = "frLeftMidThird";
-   const LAYOUT_RUNNER_RIGHT_MID_THIRD = "frRightMidThird";
-   const LAYOUT_RUNNER_UNKNOWN         = "frUnknown";
+   /** layouts of forerunner */
+   const LAYOUT_FR_ALL             = "frAll";
+   const LAYOUT_FR_TOP_HALF        = "frTopHalf";
+   const LAYOUT_FR_BOT_HALF        = "frBotHalf";
+   const LAYOUT_FR_TOP_THIRD       = "frTopThird";
+   const LAYOUT_FR_MID_THIRD       = "frMidThird";
+   const LAYOUT_FR_BOT_THIRD       = "frBotThird";
+   const LAYOUT_FR_LEFT_MID_THIRD  = "frLeftMidThird";
+   const LAYOUT_FR_RIGHT_MID_THIRD = "frRightMidThird";
+   const LAYOUT_FR_UNKNOWN         = "frUnknown";
 
-   const LAYOUT_FENIX_ALL = "fenixAll";
-   const LAYOUT_FENIX_TOP_HALF        = "fxTopHalf";
-   const LAYOUT_FENIX_BOT_HALF        = "fxBotHalf";
-   const LAYOUT_FENIX_TOP_THIRD       = "fxTopThird";
-   const LAYOUT_FENIX_MID_THIRD       = "fxMidThird";
-   const LAYOUT_FENIX_BOT_THIRD       = "fxBotThird";
-   const LAYOUT_FENIX_LEFT_MID_THIRD  = "fxLeftMidThird";
-   const LAYOUT_FENIX_RIGHT_MID_THIRD = "fxRightMidThird";
-   const LAYOUT_FENIX_TOP_LEFT_QUAD   = "fxTopLeftQuad";
-   const LAYOUT_FENIX_TOP_RIGHT_QUAD  = "fxTopRightQuad";
-   const LAYOUT_FENIX_BOT_LEFT_QUAD   = "fxBotLeftQuad";
-   const LAYOUT_FENIX_BOT_RIGHT_QUAD  = "fxBotRightQuad";
-   const LAYOUT_FENIX_UNKNOWN         = "fxUnknown";
+   /** layouts of fenix/bravo */
+   const LAYOUT_FX_ALL = "fenixAll";
+   const LAYOUT_FX_TOP_HALF        = "fxTopHalf";
+   const LAYOUT_FX_BOT_HALF        = "fxBotHalf";
+   const LAYOUT_FX_TOP_THIRD       = "fxTopThird";
+   const LAYOUT_FX_MID_THIRD       = "fxMidThird";
+   const LAYOUT_FX_BOT_THIRD       = "fxBotThird";
+   const LAYOUT_FX_LEFT_MID_THIRD  = "fxLeftMidThird";
+   const LAYOUT_FX_RIGHT_MID_THIRD = "fxRightMidThird";
+   const LAYOUT_FX_TOP_LEFT_QUAD   = "fxTopLeftQuad";
+   const LAYOUT_FX_TOP_RIGHT_QUAD  = "fxTopRightQuad";
+   const LAYOUT_FX_BOT_LEFT_QUAD   = "fxBotLeftQuad";
+   const LAYOUT_FX_BOT_RIGHT_QUAD  = "fxBotRightQuad";
+   const LAYOUT_FX_UNKNOWN         = "fxUnknown";
 
+   /** all possible obscurity flag values */
    const UNOBSCURED         = 0;  // 0000
    const OBSCURED_LEFT      = 1;  // 0001
    const OBSCURED_RIGHT     = 4;  // 0100
@@ -46,17 +49,28 @@ class ciqHeartZoneBPMView extends Ui.DataField
    const OBSCURED_TB_RIGHT  = 14; // 1110
    const OBSCURED_ALL     = 15; // 1111
 
+   /** monitored heart rate */
    hidden var mHeartRate;
 
+   /** heart zone definitions */
    var beginZone1;
    var beginZone2;
    var beginZone3;
    var beginZone4;
    var beginZone5;
 
+   /** lowest hilite zone */
    var hiliteZone = 0;
 
+   /**
+    * zone fore/background colors
+    * back1, fore1, back2, fore2, ..., back5, fore5
+    */
    var zoneColors = new [10];
+
+   /** screen dimensions */
+   var screenWidth;
+   var screenHeight;
 
    /*-------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
@@ -64,7 +78,11 @@ class ciqHeartZoneBPMView extends Ui.DataField
    {
       DataField.initialize();
 
-      mHeartRate = 0.0f;
+      var deviceSettings = Sys.getDeviceSettings();
+      screenWidth = deviceSettings.screenWidth;
+      screenHeight = deviceSettings.screenHeight;
+
+      mHeartRate = 0;
            
       initializeZoneColors();
 
@@ -168,128 +186,89 @@ class ciqHeartZoneBPMView extends Ui.DataField
          Sys.println(fontName + " dims: " + dimX + "," + dimY);
    }
 
-   // Set your layout here. Anytime the size of obscurity of
-   // the draw context is changed this will be called.
+   /*-------------------------------------------------------------------------
+    *------------------------------------------------------------------------*/
    function onLayout(dc)
    {
-      var deviceSettings = Sys.getDeviceSettings();
-      var screenWidth = deviceSettings.screenWidth;
-      var screenHeight = deviceSettings.screenHeight;
-
       var width = dc.getWidth();
       var height = dc.getHeight();
       var obscurityFlags = DataField.getObscurityFlags();
       
-      Sys.println("layout: "
-         + getLayoutName(screenWidth,screenHeight,width,height,obscurityFlags));
+      var layout = getLayoutName(screenWidth,screenHeight,width,height,obscurityFlags);
       
+      Sys.println("layout: " + layout);
+      
+var font = Gfx.FONT_NUMBER_THAI_HOT;
 
-//      var topleft = OBSCURE_TOP | OBSCURE_LEFT;
-//      var topright = OBSCURE_TOP | OBSCURE_RIGHT;
-//      var bottomleft = OBSCURE_BOTTOM | OBSCURE_LEFT;
-//      var bottomright = OBSCURE_BOTTOM | OBSCURE_RIGHT;
-//
-//      // Top left quadrant so we'll use the top left layout
-//      if (obscurityFlags == (OBSCURE_TOP & OBSCURE_LEFT)) {
-////         Sys.println("using TopLeft layout " + width + "," + height + "," + obscurityFlags);
-//         View.setLayout(Rez.Layouts.TopLeftLayout(dc));
-//
-//         // Top right quadrant so we'll use the top right layout
-//      } else if (obscurityFlags == (OBSCURE_TOP | OBSCURE_RIGHT)) {
-////         Sys.println("using TopRight layout " + width + "," + height + "," + obscurityFlags);
-//         View.setLayout(Rez.Layouts.TopRightLayout(dc));
-//
-//         // Bottom left quadrant so we'll use the bottom left layout
-//      } else if (obscurityFlags == (OBSCURE_BOTTOM | OBSCURE_LEFT)) {
-////         Sys.println("using BottomLeft layout " + width + "," + height + "," + obscurityFlags);
-//         View.setLayout(Rez.Layouts.BottomLeftLayout(dc));
-//
-//         // Bottom right quadrant so we'll use the bottom right layout
-//      } else if (obscurityFlags == (OBSCURE_BOTTOM | OBSCURE_RIGHT)) {
-////         Sys.println("using BottomRight layout " + width + "," + height + "," + obscurityFlags);
-//         View.setLayout(Rez.Layouts.BottomRightLayout(dc));
-//
-//         // Use the generic, centered layout
-//      } else {
-//         Sys.println("----------> using Main layout " + width + "," + height + "," + obscurityFlags);
+      if (layout == LAYOUT_FR_ALL) {
+         View.setLayout(Rez.Layouts.frAll(dc));
+var font = Gfx.FONT_NUMBER_THAI_HOT;
+      }
+      else if (layout == LAYOUT_FR_TOP_HALF) {
+         View.setLayout(Rez.Layouts.frTopHalf(dc));
+font = Gfx.FONT_NUMBER_HOT;
+      }
+      else if (layout == LAYOUT_FR_BOT_HALF) {
+         View.setLayout(Rez.Layouts.frBotHalf(dc));
+font = Gfx.FONT_NUMBER_HOT;
+      }
+      else {
+         View.setLayout(Rez.Layouts.frAll(dc));
+font = Gfx.FONT_NUMBER_HOT;
+      }
 
-      var font = Gfx.FONT_NUMBER_MILD;
+      var dims;
+      var fontIsSet = false;
+      var debugUsingFont = true;
 
-         var dims;
-         var fontIsSet = false;
+      dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_THAI_HOT);
+//      printFontDims("thai hot",dims[0],dims[1]);
+      if (dims[0] < width && dims[1] < height) {
+         font = Gfx.FONT_NUMBER_THAI_HOT;
+         fontIsSet = true;
+//         if (debugUsingFont) { Sys.println("using thai hot"); }
+      }
 
-         dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_THAI_HOT);
+      dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_HOT);
+//      printFontDims("hot",dims[0],dims[1]);
+      if (!fontIsSet && dims[0] < width && dims[1] < height) {
+         font = Gfx.FONT_NUMBER_HOT;
+         fontIsSet = true;
+//         if (debugUsingFont) { Sys.println("using hot"); }
+      }
 
-         var debugUsingFont = true;
-         
-         printFontDims("thai hot",dims[0],dims[1]);
-         if (dims[0] < width && dims[1] < height) {
-            font = Gfx.FONT_NUMBER_THAI_HOT;
-            fontIsSet = true;
-            if (debugUsingFont) { Sys.println("using thai hot");
-            }
+      dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_MEDIUM);
+//      printFontDims("medium",dims[0],dims[1]);
+      if (!fontIsSet && dims[0] < width && dims[1] < height) {
+         font = Gfx.FONT_NUMBER_MEDIUM;
+         fontIsSet = true;
+//         if (debugUsingFont) { Sys.println("using medium"); }
+      }
+
+      dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_MILD);
+      printFontDims("mild",dims[0],dims[1]);
+      if (!fontIsSet) {
+         font = Gfx.FONT_NUMBER_MILD;
+         fontIsSet = true;
+         if (debugUsingFont) { Sys.println("using low");
          }
+      }
+/*
+ */
 
-/**/
-         dims = dc.getTextDimensions("888", Gfx.FONT_SYSTEM_NUMBER_THAI_HOT);
-         printFontDims("system thai hot",dims[0],dims[1]);
-         if (dims[0] < width && dims[1] < height) {
-            font = Gfx.FONT_SYSTEM_NUMBER_THAI_HOT;
-            fontIsSet = true;
-            if (debugUsingFont) { Sys.println("using system thai hot");
-            }
-         }
-
-         dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_HOT);
-         printFontDims("hot",dims[0],dims[1]);
-         if (!fontIsSet && dims[0] < width && dims[1] < height) {
-            font = Gfx.FONT_NUMBER_HOT;
-            fontIsSet = true;
-            if (debugUsingFont) { Sys.println("using hot");
-            }
-         }
-
-         dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_MEDIUM);
-         printFontDims("medium",dims[0],dims[1]);
-         if (!fontIsSet && dims[0] < width && dims[1] < height) {
-            font = Gfx.FONT_NUMBER_MEDIUM;
-            fontIsSet = true;
-            if (debugUsingFont) { Sys.println("using medium");
-            }
-         }
-
-         dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_MILD);
-         printFontDims("mild",dims[0],dims[1]);
-         if (!fontIsSet) {
-            font = Gfx.FONT_NUMBER_MILD;
-            fontIsSet = true;
-            if (debugUsingFont) { Sys.println("using low");
-            }
-         }
-/**/
-
-         View.setLayout(Rez.Layouts.MainLayout(dc));
-         var labelView = View.findDrawableById("label");
-         labelView.locY = labelView.locY - 16;
-         var valueView = View.findDrawableById("value");
-         valueView.locY = valueView.locY + 7;
-         valueView.setFont(font);
-         /* First go to center, then to account for the fact that the top of font
-          * is rendered at the y-value, subract half the font size to center it
-          * on the center.
-          */
-         valueView.locY = height/2 - Gfx.getFontHeight(font)/2;
-//      }
-
-      View.findDrawableById("label").setText(Rez.Strings.label);
+      var valueView = View.findDrawableById("value");
+      /* First go to center, then to account for the fact that the top of font
+       * is rendered at the y-value, subract half the font size to center it
+       * on the center.
+       */
+//      valueView.locY = height/2 - Gfx.getFontHeight(font)/2; // best one
+//      valueView.locY = height/2 - valueView.height/4;
 
       return true;
    }
 
    /*-------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
-    // The given info object contains all the current workout
-    // information. Calculate a value and save it locally in this method.
     function compute(info)
     {
         // See Activity.Info in the documentation for available information.
@@ -300,6 +279,33 @@ class ciqHeartZoneBPMView extends Ui.DataField
                 mHeartRate = 0;
             }
         }
+    }
+
+   /*-------------------------------------------------------------------------
+    * Display the value you computed here. This will be called
+    * once a second when the data field is visible.
+    *------------------------------------------------------------------------*/
+    function onUpdate(dc)
+    {
+       var zone = getZone(mHeartRate);
+
+       var zoneBgColor = getZoneBgColor(zone);
+       var zoneFgColor = getZoneFgColor(zone);
+
+//       Sys.println("zone,bg,fg: "
+//             + zone + "," + zoneBgColor + "," + zoneFgColor);
+
+        // Set the background color
+        View.findDrawableById("Background").setColor(zoneBgColor);
+
+        // Get the value field and set it's foreground color and text
+        var value = View.findDrawableById("value");
+        value.setColor(zoneFgColor);
+//        value.setText(mHeartRate.format("%2f"));
+        value.setText(toStr(mHeartRate));
+
+        // Call parent's onUpdate(dc) to redraw the layout
+        View.onUpdate(dc);
     }
 
    /*-------------------------------------------------------------------------
@@ -347,43 +353,6 @@ class ciqHeartZoneBPMView extends Ui.DataField
        }
        
        return zone;
-    }
-
-   /*-------------------------------------------------------------------------
-    * Display the value you computed here. This will be called
-    * once a second when the data field is visible.
-    *------------------------------------------------------------------------*/
-    function onUpdate(dc)
-    {
-       var zone = getZone(mHeartRate);
-
-       var zoneBgColor = getZoneBgColor(zone);
-       var zoneFgColor = getZoneFgColor(zone);
-
-       Sys.println("zone,bg,fg: "
-             + zone + "," + zoneBgColor + "," + zoneFgColor);
-
-//      dc.setColor(zoneFgColor,zoneBgColor);
-//      dc.clear();
-
-        // Set the background color
-//        View.findDrawableById("Background").setColor(getBackgroundColor());
-        View.findDrawableById("Background").setColor(zoneBgColor);
-
-        // Set the foreground color and value
-        var value = View.findDrawableById("value");
-//        if (getBackgroundColor() == Gfx.COLOR_BLACK) {
-//            value.setColor(Gfx.COLOR_WHITE);
-//        } else {
-//            value.setColor(Gfx.COLOR_BLACK);
-//        }
-
-        value.setColor(zoneFgColor);
-//        value.setText(mHeartRate.format("%2f"));
-        value.setText(toStr(mHeartRate));
-
-        // Call parent's onUpdate(dc) to redraw the layout
-        View.onUpdate(dc);
     }
 
    function toStr(o) {
@@ -447,76 +416,75 @@ class ciqHeartZoneBPMView extends Ui.DataField
       
       if (screenWidth == 215 && screenHeight == 180 ) {
 
-         model = "runner";
-         
          if (obscurity == OBSCURED_ALL) {
-            model = LAYOUT_RUNNER_ALL;
+            model = LAYOUT_FR_ALL;
          }
          else if (obscurity == OBSCURED_TOP_LR && height == 89) {
-            model = LAYOUT_RUNNER_TOP_HALF;
+            model = LAYOUT_FR_TOP_HALF;
          }
          else if (obscurity == OBSCURED_BOT_LR && height == 89) {
-            model = LAYOUT_RUNNER_BOT_HALF;
+            model = LAYOUT_FR_BOT_HALF;
          }
          else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
-            model = LAYOUT_RUNNER_TOP_THIRD;
+            model = LAYOUT_FR_TOP_THIRD;
          }
          else if (obscurity == OBSCURED_LR) {
-            model = LAYOUT_RUNNER_MID_THIRD;
+            model = LAYOUT_FR_MID_THIRD;
          }
          else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
-            model = LAYOUT_RUNNER_BOT_THIRD;
+            model = LAYOUT_FR_BOT_THIRD;
          }
          else if (obscurity == OBSCURED_LEFT) {
-            model = LAYOUT_RUNNER_LEFT_MID_THIRD;
+            model = LAYOUT_FR_LEFT_MID_THIRD;
          }
          else if (obscurity == OBSCURED_RIGHT) {
-            model = LAYOUT_RUNNER_RIGHT_MID_THIRD;
+            model = LAYOUT_FR_RIGHT_MID_THIRD;
          }
          else {
-            model = LAYOUT_RUNNER_UNKNOWN;
+//            model = LAYOUT_FR_UNKNOWN; //TODO what?
+            model = LAYOUT_FR_ALL;
          }
       }
       else if (screenWidth == 218 && screenHeight == 218 ) {
 
          if (obscurity == OBSCURED_ALL) {
-            model = LAYOUT_FENIX_ALL;
+            model = LAYOUT_FX_ALL;
          }
          else if (obscurity == OBSCURED_TOP_LR && height == 108) {
-            model = LAYOUT_FENIX_TOP_HALF;
+            model = LAYOUT_FX_TOP_HALF;
          }
          else if (obscurity == OBSCURED_BOT_LR && height == 108) {
-            model = LAYOUT_FENIX_BOT_HALF;
+            model = LAYOUT_FX_BOT_HALF;
          }
          else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
-            model = LAYOUT_FENIX_TOP_THIRD;
+            model = LAYOUT_FX_TOP_THIRD;
          }
          else if (obscurity == OBSCURED_LR) {
-            model = LAYOUT_FENIX_MID_THIRD;
+            model = LAYOUT_FX_MID_THIRD;
          }
          else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
-            model = LAYOUT_FENIX_BOT_THIRD;
+            model = LAYOUT_FX_BOT_THIRD;
          }
          else if (obscurity == OBSCURED_LEFT) {
-            model = LAYOUT_FENIX_LEFT_MID_THIRD;
+            model = LAYOUT_FX_LEFT_MID_THIRD;
          }
          else if (obscurity == OBSCURED_RIGHT) {
-            model = LAYOUT_FENIX_RIGHT_MID_THIRD ;
+            model = LAYOUT_FX_RIGHT_MID_THIRD ;
          }
          else if (obscurity == OBSCURED_TOP_LEFT) {
-            model = LAYOUT_FENIX_TOP_LEFT_QUAD;
+            model = LAYOUT_FX_TOP_LEFT_QUAD;
          }
          else if (obscurity == OBSCURED_TOP_RIGHT) {
-            model = LAYOUT_FENIX_TOP_RIGHT_QUAD;
+            model = LAYOUT_FX_TOP_RIGHT_QUAD;
          }
          else if (obscurity == OBSCURED_BOT_LEFT) {
-            model = LAYOUT_FENIX_BOT_LEFT_QUAD;
+            model = LAYOUT_FX_BOT_LEFT_QUAD;
          }
          else if (obscurity == OBSCURED_BOT_RIGHT) {
-            model = LAYOUT_FENIX_BOT_RIGHT_QUAD;
+            model = LAYOUT_FX_BOT_RIGHT_QUAD;
          }
          else {
-            model = LAYOUT_FENIX_UNKNOWN;
+            model = LAYOUT_FX_UNKNOWN;
          }
       }
       
