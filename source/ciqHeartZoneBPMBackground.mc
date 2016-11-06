@@ -4,23 +4,38 @@ using Toybox.Graphics as Gfx;
 
 class Background extends Ui.Drawable {
 
-    hidden var mColor;
+    hidden var mBackColor;
+    hidden var mBorderColor;
+    hidden var mCenterX;
+    hidden var mCenterY;
+    hidden var mRadius;
 
-    function initialize() {
-        var dictionary = {
-            :identifier => "Background"
-        };
+    function initialize(params)
+    {
+        Drawable.initialize(params);
 
-        Drawable.initialize(dictionary);
+//        var dictionary = {
+//            :identifier => "Background"
+//        };
+
+        mCenterX = params.get(:center_x);
+        mCenterY = params.get(:center_y);
+        mRadius = params.get(:radius);
     }
 
-    function setColor(color) {
-        mColor = color;
+    function setBackColor(color) {
+        mBackColor = color;
+    }
+
+    function setBorderColor(color) {
+        mBorderColor = color;
     }
 
     function draw(dc) {
-        dc.setColor(Gfx.COLOR_TRANSPARENT, mColor);
+        dc.setColor(Gfx.COLOR_TRANSPARENT, mBorderColor);
         dc.clear();
+        dc.setColor(mBackColor,mBackColor);
+        dc.fillCircle(mCenterX,mCenterY,mRadius);
     }
 
 }

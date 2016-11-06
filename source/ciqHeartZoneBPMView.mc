@@ -49,8 +49,13 @@ class ciqHeartZoneBPMView extends Ui.DataField
    const OBSCURED_TB_RIGHT  = 14; // 1110
    const OBSCURED_ALL     = 15; // 1111
 
-   /** monitored heart rate */
-   hidden var mHeartRate;
+   /** screen dimensions */
+   var screenWidth;
+   var screenHeight;
+
+   /** default back/foreground colors */
+   var defaultBgColor = Gfx.COLOR_WHITE;
+   var defaultFgColor = Gfx.COLOR_BLACK;
 
    /** heart zone definitions */
    var beginZone1;
@@ -68,9 +73,8 @@ class ciqHeartZoneBPMView extends Ui.DataField
     */
    var zoneColors = new [10];
 
-   /** screen dimensions */
-   var screenWidth;
-   var screenHeight;
+   /** monitored heart rate */
+   hidden var mHeartRate;
 
    /*-------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
@@ -263,7 +267,7 @@ font = Gfx.FONT_NUMBER_HOT;
        */
 //      valueView.locY = height/2 - Gfx.getFontHeight(font)/2; // best one
 //      valueView.locY = height/2 - valueView.height/4;
-
+      
       return true;
    }
 
@@ -291,21 +295,38 @@ font = Gfx.FONT_NUMBER_HOT;
 
        var zoneBgColor = getZoneBgColor(zone);
        var zoneFgColor = getZoneFgColor(zone);
-
+       
 //       Sys.println("zone,bg,fg: "
 //             + zone + "," + zoneBgColor + "," + zoneFgColor);
 
-        // Set the background color
-        View.findDrawableById("Background").setColor(zoneBgColor);
+       var background = View.findDrawableById("Background");
+       background.setBackColor(Gfx.COLOR_WHITE);
+       background.setBorderColor(Gfx.COLOR_PURPLE);
+       background.draw(dc);
+        
+//       var circle_data = View.findDrawableById("circle_data");
+//       dc.setColor(defaultFgColor,defaultBgColor);
+//       dc.drawCircle(circle_data.locX,circle_data.locY,circle_data.width);
+
+//        var border = View.findDrawableById("FullCircle");
+//       Sys.println("FullCircle: " + border);
+//       dc.setColor(Gfx.COLOR_DK_RED,Gfx.COLOR_DK_RED);
+//       border.draw(dc);
 
         // Get the value field and set it's foreground color and text
         var value = View.findDrawableById("value");
-        value.setColor(zoneFgColor);
+//        value.setColor(zoneFgColor);
+        value.setColor(Gfx.COLOR_BLACK);
+//        dc.setColor(zoneFgColor,Gfx.COLOR_TRANSPARENT);
 //        value.setText(mHeartRate.format("%2f"));
         value.setText(toStr(mHeartRate));
+        value.draw(dc);
+        
 
         // Call parent's onUpdate(dc) to redraw the layout
+/*
         View.onUpdate(dc);
+*/
     }
 
    /*-------------------------------------------------------------------------
