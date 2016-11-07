@@ -76,6 +76,12 @@ class ciqHeartZoneBPMView extends Ui.DataField
    /** monitored heart rate */
    hidden var mHeartRate;
 
+   /** drawable for background */
+   hidden var background;
+
+   /** drawable for value */
+   hidden var value;
+
    /*-------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
    function initialize()
@@ -268,14 +274,8 @@ class ciqHeartZoneBPMView extends Ui.DataField
 //         }
 //      }
  */
-
-      var valueView = View.findDrawableById("value");
-      /* First go to center, then to account for the fact that the top of font
-       * is rendered at the y-value, subract half the font size to center it
-       * on the center.
-       */
-//      valueView.locY = height/2 - Gfx.getFontHeight(font)/2; // best one
-//      valueView.locY = height/2 - valueView.height/4;
+      background = View.findDrawableById("Background");
+      value = View.findDrawableById("value");
       
       return true;
    }
@@ -300,6 +300,9 @@ class ciqHeartZoneBPMView extends Ui.DataField
     *------------------------------------------------------------------------*/
     function onUpdate(dc)
     {
+       dc.setColor(defaultFgColor,defaultBgColor);
+       dc.clear();
+
 hiliteZone = 6;
        var zone = getZone(mHeartRate);
 
@@ -310,30 +313,31 @@ hiliteZone = 6;
        //   + zone + "," + zoneBgColor + "," + zoneFgColor);
 
        /*
-        * Draw backdrop.
+        * Draw backdrop. If below the hilite zone, fill with the default bg
+        * color, and draw text with default fg color.
         */
-       var background = View.findDrawableById("Background");
-       background.setBorderColor(zoneBgColor);
-       background.setBackColor(zoneBgColor);
+       if (background != null) {
+          background.setBorderColor(zoneBgColor);
+          if (zone < hiliteZone) {
+             background.setBackColor(defaultBgColor);
+          }
+          else {
+             background.setBackColor(zoneBgColor);
+          }
+          background.draw(dc);
+       }
 
        /*
         * Draw the heart rate.
         */
-       var value = View.findDrawableById("value");
-       value.setColor(zoneFgColor);
-       //        value.setText(mHeartRate.format("%2f"));
        value.setText(toStr(mHeartRate));
-
-       /*
-        * If below the hilite zone, fill with the default bg color,
-        * and draw text with default fg color.
-        */
+       //        value.setText(mHeartRate.format("%2f"));
        if (zone < hiliteZone) {
-          background.setBackColor(defaultBgColor);
           value.setColor(defaultFgColor);
        }
-
-       background.draw(dc);
+       else {
+          value.setColor(zoneFgColor);
+       }
        value.draw(dc);
     }
 
