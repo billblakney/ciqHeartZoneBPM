@@ -193,10 +193,11 @@ class ciqHeartZoneBPMView extends Ui.DataField
       var height = dc.getHeight();
       var obscurityFlags = DataField.getObscurityFlags();
       
-      var layout = getLayoutName(screenWidth,screenHeight,width,height,obscurityFlags);
+      /*var layout = */getLayoutName(dc,screenWidth,screenHeight,width,height,obscurityFlags);
       
 //      Sys.println("layout: " + layout);
       
+/*
       if (layout == LAYOUT_ALL) {
          View.setLayout(Rez.Layouts.All(dc));
       }
@@ -236,7 +237,7 @@ class ciqHeartZoneBPMView extends Ui.DataField
       else {
          View.setLayout(Rez.Layouts.All(dc));
       }
-
+*/
 /*
       var dims;
       var fontIsSet = false;
@@ -347,7 +348,7 @@ hiliteZone = 6;
     function getZoneBgColor(zone)
     {
        if (zone == 0) {
-          return Gfx.COLOR_WHITE; //TODO
+          return defaultBgColor;
        }
        else {
           return zoneColors[2*(zone-1)];
@@ -359,7 +360,7 @@ hiliteZone = 6;
     function getZoneFgColor(zone)
     {
        if (zone == 0) {
-          return Gfx.COLOR_BLACK; //TODO
+          return defaultFgColor;
        }
        else {
           return zoneColors[2*(zone-1)+1];
@@ -447,41 +448,238 @@ hiliteZone = 6;
    /*-------------------------------------------------------------------------
     * TODO can simplify this for less code
     *------------------------------------------------------------------------*/
-   function getLayoutName(screenWidth,screenHeight,width,height,obscurity)
+
+//   (:semiround215x180) function getLayoutName(dc,screenWidth,screenHeight,width,height,obscurity)
+//   {
+//      if (obscurity == OBSCURED_ALL) {
+//         View.setLayout(Rez.Layouts.All(dc));
+//         //            return LAYOUT_ALL;
+//      }
+//      else if (obscurity == OBSCURED_TOP_LR && height == 89) {
+//         View.setLayout(Rez.Layouts.TopHalf(dc));
+//         //            return LAYOUT_TOP_HALF;
+//      }
+//      else if (obscurity == OBSCURED_BOT_LR && height == 89) {
+//         View.setLayout(Rez.Layouts.BotHalf(dc));
+//         //            return LAYOUT_BOT_HALF;
+//      }
+//      else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
+//         View.setLayout(Rez.Layouts.TopThird(dc));
+//         //            return LAYOUT_TOP_THIRD;
+//      }
+//      else if (obscurity == OBSCURED_LR) {
+//         View.setLayout(Rez.Layouts.MidThird(dc));
+//         //            return LAYOUT_MID_THIRD;
+//      }
+//      else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
+//         View.setLayout(Rez.Layouts.BotThird(dc));
+//         //            return LAYOUT_BOT_THIRD;
+//      }
+//      else if (obscurity == OBSCURED_LEFT) {
+//         View.setLayout(Rez.Layouts.LeftMidThird(dc));
+//         //            return LAYOUT_LEFT_MID_THIRD;
+//      }
+//      else if (obscurity == OBSCURED_RIGHT) {
+//         View.setLayout(Rez.Layouts.RightMidThird(dc));
+//         //            return LAYOUT_RIGHT_MID_THIRD;
+//      }
+//      else {
+//         View.setLayout(Rez.Layouts.All(dc));
+//         //            return LAYOUT_UNKNOWN; //TODO what?
+//         //            return LAYOUT_ALL;
+//      }
+//   }
+//
+//   (:round218x218) function getLayoutName(dc,screenWidth,screenHeight,width,height,obscurity)
+//   {
+//      if (obscurity == OBSCURED_ALL) {
+//         View.setLayout(Rez.Layouts.All(dc));
+//         //            return LAYOUT_ALL;
+//      }
+//      else if (obscurity == OBSCURED_TOP_LR && height == 108) {
+//         View.setLayout(Rez.Layouts.TopHalf(dc));
+//         //            return LAYOUT_TOP_HALF;
+//      }
+//      else if (obscurity == OBSCURED_BOT_LR && height == 108) {
+//         View.setLayout(Rez.Layouts.BotHalf(dc));
+//         //            return LAYOUT_BOT_HALF;
+//      }
+//      else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
+//         View.setLayout(Rez.Layouts.TopThird(dc));
+//         //            return LAYOUT_TOP_THIRD;
+//      }
+//      else if (obscurity == OBSCURED_LR) {
+//         View.setLayout(Rez.Layouts.MidThird(dc));
+//         //            return LAYOUT_MID_THIRD;
+//      }
+//      else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
+//         View.setLayout(Rez.Layouts.BotThird(dc));
+//         //            return LAYOUT_BOT_THIRD;
+//      }
+//      else if (obscurity == OBSCURED_LEFT) {
+//         View.setLayout(Rez.Layouts.LeftMidThird(dc));
+//         //            return LAYOUT_LEFT_MID_THIRD;
+//      }
+//      else if (obscurity == OBSCURED_RIGHT) {
+//         View.setLayout(Rez.Layouts.RightMidThird(dc));
+//         //            return LAYOUT_RIGHT_MID_THIRD ;
+//      }
+//      else if (obscurity == OBSCURED_TOP_LEFT) {
+//         View.setLayout(Rez.Layouts.TopLeftQuad(dc));
+//         //            return LAYOUT_TOP_LEFT_QUAD;
+//      }
+//      else if (obscurity == OBSCURED_TOP_RIGHT) {
+//         View.setLayout(Rez.Layouts.TopRightQuad(dc));
+//         //            return LAYOUT_TOP_RIGHT_QUAD;
+//      }
+//      else if (obscurity == OBSCURED_BOT_LEFT) {
+//         View.setLayout(Rez.Layouts.BotLeftQuad(dc));
+//         //            return LAYOUT_BOT_LEFT_QUAD;
+//      }
+//      else if (obscurity == OBSCURED_BOT_RIGHT) {
+//         View.setLayout(Rez.Layouts.BotRightQuad(dc));
+//         //            return LAYOUT_BOT_RIGHT_QUAD;
+//      }
+//      else {
+//         View.setLayout(Rez.Layouts.TopHalf(dc));
+//         //            return LAYOUT_UNKNOWN;
+//      }
+//   }
+
+   function getLayoutName(dc,screenWidth,screenHeight,width,height,obscurity)
    {
-      var model = "unknown";
-      
       if (screenWidth == 215 && screenHeight == 180 ) {
 
          if (obscurity == OBSCURED_ALL) {
-            model = LAYOUT_ALL;
+            View.setLayout(Rez.Layouts.All(dc));
+//            return LAYOUT_ALL;
          }
          else if (obscurity == OBSCURED_TOP_LR && height == 89) {
-            model = LAYOUT_TOP_HALF;
+            View.setLayout(Rez.Layouts.TopHalf(dc));
+//            return LAYOUT_TOP_HALF;
          }
          else if (obscurity == OBSCURED_BOT_LR && height == 89) {
-            model = LAYOUT_BOT_HALF;
+            View.setLayout(Rez.Layouts.BotHalf(dc));
+//            return LAYOUT_BOT_HALF;
          }
          else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
-            model = LAYOUT_TOP_THIRD;
+            View.setLayout(Rez.Layouts.TopThird(dc));
+//            return LAYOUT_TOP_THIRD;
          }
          else if (obscurity == OBSCURED_LR) {
-            model = LAYOUT_MID_THIRD;
+            View.setLayout(Rez.Layouts.MidThird(dc));
+//            return LAYOUT_MID_THIRD;
          }
          else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
-            model = LAYOUT_BOT_THIRD;
+            View.setLayout(Rez.Layouts.BotThird(dc));
+//            return LAYOUT_BOT_THIRD;
          }
          else if (obscurity == OBSCURED_LEFT) {
-            model = LAYOUT_LEFT_MID_THIRD;
+            View.setLayout(Rez.Layouts.LeftMidThird(dc));
+//            return LAYOUT_LEFT_MID_THIRD;
          }
          else if (obscurity == OBSCURED_RIGHT) {
-            model = LAYOUT_RIGHT_MID_THIRD;
+            View.setLayout(Rez.Layouts.RightMidThird(dc));
+//            return LAYOUT_RIGHT_MID_THIRD;
          }
          else {
-//            model = LAYOUT_UNKNOWN; //TODO what?
-            model = LAYOUT_ALL;
+//            return LAYOUT_UNKNOWN; //TODO what?
+//            return LAYOUT_ALL;
          }
       }
+//      else if (screenWidth == 218 && screenHeight == 218 ) {
+//
+//         if (obscurity == OBSCURED_ALL) {
+//            View.setLayout(Rez.Layouts.All(dc));
+////            return LAYOUT_ALL;
+//         }
+//         else if (obscurity == OBSCURED_TOP_LR && height == 108) {
+//            View.setLayout(Rez.Layouts.TopHalf(dc));
+////            return LAYOUT_TOP_HALF;
+//         }
+//         else if (obscurity == OBSCURED_BOT_LR && height == 108) {
+//            View.setLayout(Rez.Layouts.BotHalf(dc));
+////            return LAYOUT_BOT_HALF;
+//         }
+//         else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
+//            View.setLayout(Rez.Layouts.TopThird(dc));
+////            return LAYOUT_TOP_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_LR) {
+//            View.setLayout(Rez.Layouts.MidThird(dc));
+////            return LAYOUT_MID_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
+//            View.setLayout(Rez.Layouts.BotThird(dc));
+////            return LAYOUT_BOT_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_LEFT) {
+//            View.setLayout(Rez.Layouts.LeftMidThird(dc));
+////            return LAYOUT_LEFT_MID_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_RIGHT) {
+//            View.setLayout(Rez.Layouts.RightMidThird(dc));
+////            return LAYOUT_RIGHT_MID_THIRD ;
+//         }
+//         else if (obscurity == OBSCURED_TOP_LEFT) {
+//            View.setLayout(Rez.Layouts.TopLeftQuad(dc));
+////            return LAYOUT_TOP_LEFT_QUAD;
+//         }
+//         else if (obscurity == OBSCURED_TOP_RIGHT) {
+//            View.setLayout(Rez.Layouts.TopRightQuad(dc));
+////            return LAYOUT_TOP_RIGHT_QUAD;
+//         }
+//         else if (obscurity == OBSCURED_BOT_LEFT) {
+//            View.setLayout(Rez.Layouts.BotLeftQuad(dc));
+////            return LAYOUT_BOT_LEFT_QUAD;
+//         }
+//         else if (obscurity == OBSCURED_BOT_RIGHT) {
+//            View.setLayout(Rez.Layouts.BotRightQuad(dc));
+////            return LAYOUT_BOT_RIGHT_QUAD;
+//         }
+//         else {
+////            return LAYOUT_UNKNOWN;
+//         }
+//      }
+      
+//      return LAYOUT_UNKNOWN;
+   }
+
+//   function getLayoutName(screenWidth,screenHeight,width,height,obscurity)
+//   {
+//      var model = "unknown";
+//      
+//      if (screenWidth == 215 && screenHeight == 180 ) {
+//
+//         if (obscurity == OBSCURED_ALL) {
+//            model = LAYOUT_ALL;
+//         }
+//         else if (obscurity == OBSCURED_TOP_LR && height == 89) {
+//            model = LAYOUT_TOP_HALF;
+//         }
+//         else if (obscurity == OBSCURED_BOT_LR && height == 89) {
+//            model = LAYOUT_BOT_HALF;
+//         }
+//         else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
+//            model = LAYOUT_TOP_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_LR) {
+//            model = LAYOUT_MID_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
+//            model = LAYOUT_BOT_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_LEFT) {
+//            model = LAYOUT_LEFT_MID_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_RIGHT) {
+//            model = LAYOUT_RIGHT_MID_THIRD;
+//         }
+//         else {
+////            model = LAYOUT_UNKNOWN; //TODO what?
+//            model = LAYOUT_ALL;
+//         }
+//      }
 //      else if (screenWidth == 218 && screenHeight == 218 ) {
 //
 //         if (obscurity == OBSCURED_ALL) {
@@ -524,7 +722,7 @@ hiliteZone = 6;
 //            model = LAYOUT_UNKNOWN;
 //         }
 //      }
-      
-      return model;
-   }
+//      
+//      return model;
+//   }
 }
