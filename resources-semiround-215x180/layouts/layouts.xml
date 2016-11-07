@@ -1,7 +1,7 @@
 <!-- layouts for 215x180 -->
 <layouts>
     <!-- A generic, centered layout. -->
-    <layout id="frAll">
+    <layout id="All">
         <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_THAI_HOT" />
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
@@ -9,7 +9,7 @@
         	<param name="radius">90</param>
         </drawable>
     </layout>
-    <layout id="frTopHalf">
+    <layout id="TopHalf">
         <label id="value" x="center" y="20" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
@@ -17,7 +17,7 @@
         	<param name="radius">90</param>
         </drawable>
     </layout>
-    <layout id="frBotHalf">
+    <layout id="BotHalf">
         <label id="value" x="center" y="10" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
@@ -25,7 +25,7 @@
 	        <param name="radius">90</param>
         </drawable>
     </layout>
-    <layout id="frTopThird">
+    <layout id="TopThird">
         <label id="value" x="center" y="7" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
@@ -33,7 +33,7 @@
         	<param name="radius">90</param>
         </drawable>
     </layout>
-    <layout id="frMidThird">
+    <layout id="MidThird">
         <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
@@ -41,7 +41,7 @@
         	<param name="radius">90</param>
         </drawable>
     </layout>
-    <layout id="frLeftMidThird">
+    <layout id="LeftMidThird">
         <label id="value" x="60" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
@@ -49,7 +49,7 @@
         	<param name="radius">90</param>
         </drawable>
     </layout>
-    <layout id="frRightMidThird">
+    <layout id="RightMidThird">
         <label id="value" x="40" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
         <drawable id="Background" class="Background" >
         	<param name="center_x">0</param>
@@ -57,7 +57,7 @@
         	<param name="radius">90</param>
         </drawable>
     </layout>
-    <layout id="frBotThird">
+    <layout id="BotThird">
         <label id="value" x="center" y="2" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
@@ -66,13 +66,7 @@
         </drawable>
     </layout>
 </layouts>
-<!--
-         View.setLayout(Rez.Layouts.frTopThird(dc));
-         View.setLayout(Rez.Layouts.frMidThird(dc));
-         View.setLayout(Rez.Layouts.frBotThird(dc));
-         View.setLayout(Rez.Layouts.frTLeftMidThird(dc));
-         View.setLayout(Rez.Layouts.frRightMidThird(dc));
--->
+<!-- -->
 <!-- fr height: 180, half: 90, topThird: 55, midThird: 66 -->
 <!-- dimensions of 888 -->
 <!-- number thai hot: 120,104 -->

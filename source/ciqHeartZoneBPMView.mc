@@ -5,31 +5,20 @@ using Toybox.UserProfile as Profile;
 
 class ciqHeartZoneBPMView extends Ui.DataField
 {
-   /** layouts of forerunner */
-   const LAYOUT_FR_ALL             = "frAll";
-   const LAYOUT_FR_TOP_HALF        = "frTopHalf";
-   const LAYOUT_FR_BOT_HALF        = "frBotHalf";
-   const LAYOUT_FR_TOP_THIRD       = "frTopThird";
-   const LAYOUT_FR_MID_THIRD       = "frMidThird";
-   const LAYOUT_FR_BOT_THIRD       = "frBotThird";
-   const LAYOUT_FR_LEFT_MID_THIRD  = "frLeftMidThird";
-   const LAYOUT_FR_RIGHT_MID_THIRD = "frRightMidThird";
-   const LAYOUT_FR_UNKNOWN         = "frUnknown";
-
-   /** layouts of fenix/bravo */
-   const LAYOUT_FX_ALL = "fenixAll";
-   const LAYOUT_FX_TOP_HALF        = "fxTopHalf";
-   const LAYOUT_FX_BOT_HALF        = "fxBotHalf";
-   const LAYOUT_FX_TOP_THIRD       = "fxTopThird";
-   const LAYOUT_FX_MID_THIRD       = "fxMidThird";
-   const LAYOUT_FX_BOT_THIRD       = "fxBotThird";
-   const LAYOUT_FX_LEFT_MID_THIRD  = "fxLeftMidThird";
-   const LAYOUT_FX_RIGHT_MID_THIRD = "fxRightMidThird";
-   const LAYOUT_FX_TOP_LEFT_QUAD   = "fxTopLeftQuad";
-   const LAYOUT_FX_TOP_RIGHT_QUAD  = "fxTopRightQuad";
-   const LAYOUT_FX_BOT_LEFT_QUAD   = "fxBotLeftQuad";
-   const LAYOUT_FX_BOT_RIGHT_QUAD  = "fxBotRightQuad";
-   const LAYOUT_FX_UNKNOWN         = "fxUnknown";
+   /** layouts for different watchface areas */
+   const LAYOUT_ALL             = "All";
+   const LAYOUT_TOP_HALF        = "TopHalf";
+   const LAYOUT_BOT_HALF        = "BotHalf";
+   const LAYOUT_TOP_THIRD       = "TopThird";
+   const LAYOUT_MID_THIRD       = "MidThird";
+   const LAYOUT_LEFT_MID_THIRD  = "LeftMidThird";
+   const LAYOUT_RIGHT_MID_THIRD = "RightMidThird";
+   const LAYOUT_BOT_THIRD       = "BotThird";
+   const LAYOUT_TOP_LEFT_QUAD   = "TopLeftQuad";
+   const LAYOUT_TOP_RIGHT_QUAD  = "TopRightQuad";
+   const LAYOUT_BOT_LEFT_QUAD   = "BotLeftQuad";
+   const LAYOUT_BOT_RIGHT_QUAD  = "BotRightQuad";
+   const LAYOUT_UNKNOWN         = "Unknown";
 
    /** all possible obscurity flag values */
    const UNOBSCURED         = 0;  // 0000
@@ -206,34 +195,46 @@ class ciqHeartZoneBPMView extends Ui.DataField
       
       var layout = getLayoutName(screenWidth,screenHeight,width,height,obscurityFlags);
       
-      Sys.println("layout: " + layout);
+//      Sys.println("layout: " + layout);
       
-      if (layout == LAYOUT_FR_ALL) {
-         View.setLayout(Rez.Layouts.frAll(dc));
+      if (layout == LAYOUT_ALL) {
+         View.setLayout(Rez.Layouts.All(dc));
       }
-      else if (layout == LAYOUT_FR_TOP_HALF) {
-         View.setLayout(Rez.Layouts.frTopHalf(dc));
+      else if (layout == LAYOUT_TOP_HALF) {
+         View.setLayout(Rez.Layouts.TopHalf(dc));
       }
-      else if (layout == LAYOUT_FR_BOT_HALF) {
-         View.setLayout(Rez.Layouts.frBotHalf(dc));
+      else if (layout == LAYOUT_BOT_HALF) {
+         View.setLayout(Rez.Layouts.BotHalf(dc));
       }
-      else if (layout == LAYOUT_FR_TOP_THIRD) {
-         View.setLayout(Rez.Layouts.frTopThird(dc));
+      else if (layout == LAYOUT_TOP_THIRD) {
+         View.setLayout(Rez.Layouts.TopThird(dc));
       }
-      else if (layout == LAYOUT_FR_MID_THIRD) {
-         View.setLayout(Rez.Layouts.frMidThird(dc));
+      else if (layout == LAYOUT_MID_THIRD) {
+         View.setLayout(Rez.Layouts.MidThird(dc));
       }
-      else if (layout == LAYOUT_FR_BOT_THIRD) {
-         View.setLayout(Rez.Layouts.frBotThird(dc));
+      else if (layout == LAYOUT_BOT_THIRD) {
+         View.setLayout(Rez.Layouts.BotThird(dc));
       }
-      else if (layout == LAYOUT_FR_LEFT_MID_THIRD) {
-         View.setLayout(Rez.Layouts.frLeftMidThird(dc));
+      else if (layout == LAYOUT_LEFT_MID_THIRD) {
+         View.setLayout(Rez.Layouts.LeftMidThird(dc));
       }
-      else if (layout == LAYOUT_FR_RIGHT_MID_THIRD) {
-         View.setLayout(Rez.Layouts.frRightMidThird(dc));
+      else if (layout == LAYOUT_RIGHT_MID_THIRD) {
+         View.setLayout(Rez.Layouts.RightMidThird(dc));
+      }
+      else if (layout == LAYOUT_TOP_LEFT_QUAD) {
+         View.setLayout(Rez.Layouts.TopLeftQuad(dc));
+      }
+      else if (layout == LAYOUT_TOP_RIGHT_QUAD) {
+         View.setLayout(Rez.Layouts.TopRightQuad(dc));
+      }
+      else if (layout == LAYOUT_BOT_LEFT_QUAD) {
+         View.setLayout(Rez.Layouts.BotLeftQuad(dc));
+      }
+      else if (layout == LAYOUT_BOT_RIGHT_QUAD) {
+         View.setLayout(Rez.Layouts.BotRightQuad(dc));
       }
       else {
-         View.setLayout(Rez.Layouts.frAll(dc));
+         View.setLayout(Rez.Layouts.All(dc));
       }
 
 /*
@@ -443,6 +444,9 @@ hiliteZone = 6;
    ------------------------
    */
  
+   /*-------------------------------------------------------------------------
+    * TODO can simplify this for less code
+    *------------------------------------------------------------------------*/
    function getLayoutName(screenWidth,screenHeight,width,height,obscurity)
    {
       var model = "unknown";
@@ -450,76 +454,76 @@ hiliteZone = 6;
       if (screenWidth == 215 && screenHeight == 180 ) {
 
          if (obscurity == OBSCURED_ALL) {
-            model = LAYOUT_FR_ALL;
+            model = LAYOUT_ALL;
          }
          else if (obscurity == OBSCURED_TOP_LR && height == 89) {
-            model = LAYOUT_FR_TOP_HALF;
+            model = LAYOUT_TOP_HALF;
          }
          else if (obscurity == OBSCURED_BOT_LR && height == 89) {
-            model = LAYOUT_FR_BOT_HALF;
+            model = LAYOUT_BOT_HALF;
          }
          else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
-            model = LAYOUT_FR_TOP_THIRD;
+            model = LAYOUT_TOP_THIRD;
          }
          else if (obscurity == OBSCURED_LR) {
-            model = LAYOUT_FR_MID_THIRD;
+            model = LAYOUT_MID_THIRD;
          }
          else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
-            model = LAYOUT_FR_BOT_THIRD;
+            model = LAYOUT_BOT_THIRD;
          }
          else if (obscurity == OBSCURED_LEFT) {
-            model = LAYOUT_FR_LEFT_MID_THIRD;
+            model = LAYOUT_LEFT_MID_THIRD;
          }
          else if (obscurity == OBSCURED_RIGHT) {
-            model = LAYOUT_FR_RIGHT_MID_THIRD;
+            model = LAYOUT_RIGHT_MID_THIRD;
          }
          else {
-//            model = LAYOUT_FR_UNKNOWN; //TODO what?
-            model = LAYOUT_FR_ALL;
+//            model = LAYOUT_UNKNOWN; //TODO what?
+            model = LAYOUT_ALL;
          }
       }
-      else if (screenWidth == 218 && screenHeight == 218 ) {
-
-         if (obscurity == OBSCURED_ALL) {
-            model = LAYOUT_FX_ALL;
-         }
-         else if (obscurity == OBSCURED_TOP_LR && height == 108) {
-            model = LAYOUT_FX_TOP_HALF;
-         }
-         else if (obscurity == OBSCURED_BOT_LR && height == 108) {
-            model = LAYOUT_FX_BOT_HALF;
-         }
-         else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
-            model = LAYOUT_FX_TOP_THIRD;
-         }
-         else if (obscurity == OBSCURED_LR) {
-            model = LAYOUT_FX_MID_THIRD;
-         }
-         else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
-            model = LAYOUT_FX_BOT_THIRD;
-         }
-         else if (obscurity == OBSCURED_LEFT) {
-            model = LAYOUT_FX_LEFT_MID_THIRD;
-         }
-         else if (obscurity == OBSCURED_RIGHT) {
-            model = LAYOUT_FX_RIGHT_MID_THIRD ;
-         }
-         else if (obscurity == OBSCURED_TOP_LEFT) {
-            model = LAYOUT_FX_TOP_LEFT_QUAD;
-         }
-         else if (obscurity == OBSCURED_TOP_RIGHT) {
-            model = LAYOUT_FX_TOP_RIGHT_QUAD;
-         }
-         else if (obscurity == OBSCURED_BOT_LEFT) {
-            model = LAYOUT_FX_BOT_LEFT_QUAD;
-         }
-         else if (obscurity == OBSCURED_BOT_RIGHT) {
-            model = LAYOUT_FX_BOT_RIGHT_QUAD;
-         }
-         else {
-            model = LAYOUT_FX_UNKNOWN;
-         }
-      }
+//      else if (screenWidth == 218 && screenHeight == 218 ) {
+//
+//         if (obscurity == OBSCURED_ALL) {
+//            model = LAYOUT_ALL;
+//         }
+//         else if (obscurity == OBSCURED_TOP_LR && height == 108) {
+//            model = LAYOUT_TOP_HALF;
+//         }
+//         else if (obscurity == OBSCURED_BOT_LR && height == 108) {
+//            model = LAYOUT_BOT_HALF;
+//         }
+//         else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
+//            model = LAYOUT_TOP_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_LR) {
+//            model = LAYOUT_MID_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
+//            model = LAYOUT_BOT_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_LEFT) {
+//            model = LAYOUT_LEFT_MID_THIRD;
+//         }
+//         else if (obscurity == OBSCURED_RIGHT) {
+//            model = LAYOUT_RIGHT_MID_THIRD ;
+//         }
+//         else if (obscurity == OBSCURED_TOP_LEFT) {
+//            model = LAYOUT_TOP_LEFT_QUAD;
+//         }
+//         else if (obscurity == OBSCURED_TOP_RIGHT) {
+//            model = LAYOUT_TOP_RIGHT_QUAD;
+//         }
+//         else if (obscurity == OBSCURED_BOT_LEFT) {
+//            model = LAYOUT_BOT_LEFT_QUAD;
+//         }
+//         else if (obscurity == OBSCURED_BOT_RIGHT) {
+//            model = LAYOUT_BOT_RIGHT_QUAD;
+//         }
+//         else {
+//            model = LAYOUT_UNKNOWN;
+//         }
+//      }
       
       return model;
    }
