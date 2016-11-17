@@ -5,43 +5,6 @@ using Toybox.UserProfile as Profile;
 
 class ciqHeartZoneBPMView extends Ui.DataField
 {
-   /** layouts for different watchface areas */
-   const LAYOUT_ALL             = "All";
-   const LAYOUT_TOP_HALF        = "TopHalf";
-   const LAYOUT_BOT_HALF        = "BotHalf";
-   const LAYOUT_TOP_THIRD       = "TopThird";
-   const LAYOUT_MID_THIRD       = "MidThird";
-   const LAYOUT_LEFT_MID_THIRD  = "LeftMidThird";
-   const LAYOUT_RIGHT_MID_THIRD = "RightMidThird";
-   const LAYOUT_BOT_THIRD       = "BotThird";
-   const LAYOUT_TOP_LEFT_QUAD   = "TopLeftQuad";
-   const LAYOUT_TOP_RIGHT_QUAD  = "TopRightQuad";
-   const LAYOUT_BOT_LEFT_QUAD   = "BotLeftQuad";
-   const LAYOUT_BOT_RIGHT_QUAD  = "BotRightQuad";
-   const LAYOUT_UNKNOWN         = "Unknown";
-
-   /** all possible obscurity flag values */
-   const UNOBSCURED         = 0;  // 0000
-   const OBSCURED_LEFT      = 1;  // 0001
-   const OBSCURED_RIGHT     = 4;  // 0100
-   const OBSCURED_LR        = 5;  // 0101
-   const OBSCURED_TOP       = 2;  // 0010
-   const OBSCURED_TOP_LEFT  = 3;  // 0011
-   const OBSCURED_TOP_RIGHT = 6;  // 0110
-   const OBSCURED_TOP_LR    = 7;  // 0111
-   const OBSCURED_BOT       = 8;  // 1000
-   const OBSCURED_BOT_LEFT  = 9;  // 1001
-   const OBSCURED_BOT_RIGHT = 12; // 1100
-   const OBSCURED_BOT_LR    = 13; // 1101
-   const OBSCURED_TB        = 10; // 1010
-   const OBSCURED_TB_LEFT   = 11; // 1011
-   const OBSCURED_TB_RIGHT  = 14; // 1110
-   const OBSCURED_ALL     = 15; // 1111
-
-   /** screen dimensions */
-   var screenWidth;
-   var screenHeight;
-
    /** default back/foreground colors */
    var defaultBgColor = Gfx.COLOR_WHITE;
    var defaultFgColor = Gfx.COLOR_BLACK;
@@ -54,7 +17,7 @@ class ciqHeartZoneBPMView extends Ui.DataField
    var beginZone5;
 
    /** lowest hilite zone */
-   var hiliteZone = 0;
+   var hiliteZone = 1;
 
    /**
     * zone fore/background colors
@@ -76,10 +39,6 @@ class ciqHeartZoneBPMView extends Ui.DataField
    function initialize()
    {
       DataField.initialize();
-
-      var deviceSettings = Sys.getDeviceSettings();
-      screenWidth = deviceSettings.screenWidth;
-      screenHeight = deviceSettings.screenHeight;
 
       mHeartRate = 0;
            
@@ -181,101 +140,16 @@ class ciqHeartZoneBPMView extends Ui.DataField
 
    /*-------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
-   function printFontDims(fontName,dimX,dimY) {
-         Sys.println(fontName + " dims: " + dimX + "," + dimY);
-   }
-
-   /*-------------------------------------------------------------------------
-    *------------------------------------------------------------------------*/
    function onLayout(dc)
    {
       var width = dc.getWidth();
       var height = dc.getHeight();
       var obscurityFlags = DataField.getObscurityFlags();
       
-      /*var layout = */getLayoutName(dc,screenWidth,screenHeight,width,height,obscurityFlags);
+      setLayout(dc,width,height,obscurityFlags);
       
 //      Sys.println("layout: " + layout);
       
-/*
-      if (layout == LAYOUT_ALL) {
-         View.setLayout(Rez.Layouts.All(dc));
-      }
-      else if (layout == LAYOUT_TOP_HALF) {
-         View.setLayout(Rez.Layouts.TopHalf(dc));
-      }
-      else if (layout == LAYOUT_BOT_HALF) {
-         View.setLayout(Rez.Layouts.BotHalf(dc));
-      }
-      else if (layout == LAYOUT_TOP_THIRD) {
-         View.setLayout(Rez.Layouts.TopThird(dc));
-      }
-      else if (layout == LAYOUT_MID_THIRD) {
-         View.setLayout(Rez.Layouts.MidThird(dc));
-      }
-      else if (layout == LAYOUT_BOT_THIRD) {
-         View.setLayout(Rez.Layouts.BotThird(dc));
-      }
-      else if (layout == LAYOUT_LEFT_MID_THIRD) {
-         View.setLayout(Rez.Layouts.LeftMidThird(dc));
-      }
-      else if (layout == LAYOUT_RIGHT_MID_THIRD) {
-         View.setLayout(Rez.Layouts.RightMidThird(dc));
-      }
-      else if (layout == LAYOUT_TOP_LEFT_QUAD) {
-         View.setLayout(Rez.Layouts.TopLeftQuad(dc));
-      }
-      else if (layout == LAYOUT_TOP_RIGHT_QUAD) {
-         View.setLayout(Rez.Layouts.TopRightQuad(dc));
-      }
-      else if (layout == LAYOUT_BOT_LEFT_QUAD) {
-         View.setLayout(Rez.Layouts.BotLeftQuad(dc));
-      }
-      else if (layout == LAYOUT_BOT_RIGHT_QUAD) {
-         View.setLayout(Rez.Layouts.BotRightQuad(dc));
-      }
-      else {
-         View.setLayout(Rez.Layouts.All(dc));
-      }
-*/
-/*
-      var dims;
-      var fontIsSet = false;
-      var debugUsingFont = true;
-
-      dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_THAI_HOT);
-      printFontDims("thai hot",dims[0],dims[1]);
-//      if (dims[0] < width && dims[1] < height) {
-//         font = Gfx.FONT_NUMBER_THAI_HOT;
-//         fontIsSet = true;
-////         if (debugUsingFont) { Sys.println("using thai hot"); }
-//      }
-
-      dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_HOT);
-      printFontDims("hot",dims[0],dims[1]);
-//      if (!fontIsSet && dims[0] < width && dims[1] < height) {
-//         font = Gfx.FONT_NUMBER_HOT;
-//         fontIsSet = true;
-////         if (debugUsingFont) { Sys.println("using hot"); }
-//      }
-
-      dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_MEDIUM);
-      printFontDims("medium",dims[0],dims[1]);
-//      if (!fontIsSet && dims[0] < width && dims[1] < height) {
-//         font = Gfx.FONT_NUMBER_MEDIUM;
-//         fontIsSet = true;
-////         if (debugUsingFont) { Sys.println("using medium"); }
-//      }
-
-      dims = dc.getTextDimensions("888", Gfx.FONT_NUMBER_MILD);
-      printFontDims("mild",dims[0],dims[1]);
-//      if (!fontIsSet) {
-//         font = Gfx.FONT_NUMBER_MILD;
-//         fontIsSet = true;
-//         if (debugUsingFont) { Sys.println("using low");
-//         }
-//      }
- */
       background = View.findDrawableById("Background");
       value = View.findDrawableById("value");
       
@@ -305,11 +179,20 @@ class ciqHeartZoneBPMView extends Ui.DataField
        dc.setColor(defaultFgColor,defaultBgColor);
        dc.clear();
 
-hiliteZone = 6;
+hiliteZone = 1;
        var zone = getZone(mHeartRate);
 
-       var zoneBgColor = getZoneBgColor(zone);
-       var zoneFgColor = getZoneFgColor(zone);
+       // get zone background color
+       var zoneBgColor = defaultBgColor;
+       if (zone >= hiliteZone) {
+          zoneBgColor = zoneColors[2*(zone-1)];
+       }
+
+       // get zone foreground color
+       var zoneFgColor = defaultFgColor;
+       if (zone >= hiliteZone) {
+          zoneFgColor = zoneColors[2*(zone-1)+1];
+       }
 
        //Sys.println("zone,bg,fg: "
        //   + zone + "," + zoneBgColor + "," + zoneFgColor);
@@ -343,29 +226,29 @@ hiliteZone = 6;
        value.draw(dc);
     }
 
-   /*-------------------------------------------------------------------------
-    *------------------------------------------------------------------------*/
-    function getZoneBgColor(zone)
-    {
-       if (zone == 0) {
-          return defaultBgColor;
-       }
-       else {
-          return zoneColors[2*(zone-1)];
-       }
-    }
+//   /*-------------------------------------------------------------------------
+//    *------------------------------------------------------------------------*/
+//    function getZoneBgColor(zone)
+//    {
+//       if (zone == 0) {
+//          return defaultBgColor;
+//       }
+//       else {
+//          return zoneColors[2*(zone-1)];
+//       }
+//    }
 
-   /*-------------------------------------------------------------------------
-    *------------------------------------------------------------------------*/
-    function getZoneFgColor(zone)
-    {
-       if (zone == 0) {
-          return defaultFgColor;
-       }
-       else {
-          return zoneColors[2*(zone-1)+1];
-       }
-    }
+//   /*-------------------------------------------------------------------------
+//    *------------------------------------------------------------------------*/
+//    function getZoneFgColor(zone)
+//    {
+//       if (zone == 0) {
+//          return defaultFgColor;
+//       }
+//       else {
+//          return zoneColors[2*(zone-1)+1];
+//       }
+//    }
     
    /*-------------------------------------------------------------------------
     * Display the value you computed here. This will be called
@@ -390,6 +273,8 @@ hiliteZone = 6;
        return zone;
     }
 
+   /*-------------------------------------------------------------------------
+    *------------------------------------------------------------------------*/
    function toStr(o) {
       if (o != null && o > 0) {
          return "" + o;
@@ -398,331 +283,52 @@ hiliteZone = 6;
       }
    }
 
-   /*
-   ************************
-   forerunner layouts
-   ------------------------
-   all: 215,180 tbLR       = 1
-   ------------------------
-   topHalf: 215, 89 tLR    = 2
-   botHalf: 215, 89 bLR    = 3
-   ------------------------
-   topThird: 215, 55 tLR   = 4
-   midThird: 215, 66 LR    = 5
-   botThird: 215, 55 bLR   = 6
-   ------------------------
-   topThird:  215, 55 tLR
-   lMidThird: 107, 66 L    = 7
-   rMidThird: 107, 66 R    = 8
-   botThird:  215, 55 bLR
-   ------------------------
-
-   ************************
-   fenix/bravo layouts
-   ------------------------
-   all:       218,218 tbLR = 1
-   ------------------------
-   topHalf:   218,108 tLR  = 2
-   botHalf:   218,108 bLR  = 3
-   ------------------------
-   topThird:  218, 70 tLR  = 4
-   midThird:  218, 74 LR   = 5
-   botThird:  218, 70 bLR  = 6
-   ------------------------
-   topHalf:   218,108 tLR
-   blQuad:    108,108 bL   = 9
-   brQuad:    108,108 bR   = 10
-   ------------------------
-   topThird:  218, 70 tLR
-   lMidThird: 108, 74 L    = 11
-   rMidThird: 108, 74 R    = 12
-   botThird:  218, 70 bLR
-   ------------------------
-   tlQuad:    108,108 tL   = 7
-   trQuad:    108,108 tR   = 8
-   blQuad:    108,108 bL
-   brQuad:    108,108 bR
-   ------------------------
-   */
- 
    /*-------------------------------------------------------------------------
-    * TODO can simplify this for less code
+    * Compact version, optimized for size.
+    * Saves about 1kB of run-time memory.
     *------------------------------------------------------------------------*/
-
-//   (:semiround215x180) function getLayoutName(dc,screenWidth,screenHeight,width,height,obscurity)
-//   {
-//      if (obscurity == OBSCURED_ALL) {
-//         View.setLayout(Rez.Layouts.All(dc));
-//         //            return LAYOUT_ALL;
-//      }
-//      else if (obscurity == OBSCURED_TOP_LR && height == 89) {
-//         View.setLayout(Rez.Layouts.TopHalf(dc));
-//         //            return LAYOUT_TOP_HALF;
-//      }
-//      else if (obscurity == OBSCURED_BOT_LR && height == 89) {
-//         View.setLayout(Rez.Layouts.BotHalf(dc));
-//         //            return LAYOUT_BOT_HALF;
-//      }
-//      else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
-//         View.setLayout(Rez.Layouts.TopThird(dc));
-//         //            return LAYOUT_TOP_THIRD;
-//      }
-//      else if (obscurity == OBSCURED_LR) {
-//         View.setLayout(Rez.Layouts.MidThird(dc));
-//         //            return LAYOUT_MID_THIRD;
-//      }
-//      else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
-//         View.setLayout(Rez.Layouts.BotThird(dc));
-//         //            return LAYOUT_BOT_THIRD;
-//      }
-//      else if (obscurity == OBSCURED_LEFT) {
-//         View.setLayout(Rez.Layouts.LeftMidThird(dc));
-//         //            return LAYOUT_LEFT_MID_THIRD;
-//      }
-//      else if (obscurity == OBSCURED_RIGHT) {
-//         View.setLayout(Rez.Layouts.RightMidThird(dc));
-//         //            return LAYOUT_RIGHT_MID_THIRD;
-//      }
-//      else {
-//         View.setLayout(Rez.Layouts.All(dc));
-//         //            return LAYOUT_UNKNOWN; //TODO what?
-//         //            return LAYOUT_ALL;
-//      }
-//   }
-//
-//   (:round218x218) function getLayoutName(dc,screenWidth,screenHeight,width,height,obscurity)
-//   {
-//      if (obscurity == OBSCURED_ALL) {
-//         View.setLayout(Rez.Layouts.All(dc));
-//         //            return LAYOUT_ALL;
-//      }
-//      else if (obscurity == OBSCURED_TOP_LR && height == 108) {
-//         View.setLayout(Rez.Layouts.TopHalf(dc));
-//         //            return LAYOUT_TOP_HALF;
-//      }
-//      else if (obscurity == OBSCURED_BOT_LR && height == 108) {
-//         View.setLayout(Rez.Layouts.BotHalf(dc));
-//         //            return LAYOUT_BOT_HALF;
-//      }
-//      else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
-//         View.setLayout(Rez.Layouts.TopThird(dc));
-//         //            return LAYOUT_TOP_THIRD;
-//      }
-//      else if (obscurity == OBSCURED_LR) {
-//         View.setLayout(Rez.Layouts.MidThird(dc));
-//         //            return LAYOUT_MID_THIRD;
-//      }
-//      else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
-//         View.setLayout(Rez.Layouts.BotThird(dc));
-//         //            return LAYOUT_BOT_THIRD;
-//      }
-//      else if (obscurity == OBSCURED_LEFT) {
-//         View.setLayout(Rez.Layouts.LeftMidThird(dc));
-//         //            return LAYOUT_LEFT_MID_THIRD;
-//      }
-//      else if (obscurity == OBSCURED_RIGHT) {
-//         View.setLayout(Rez.Layouts.RightMidThird(dc));
-//         //            return LAYOUT_RIGHT_MID_THIRD ;
-//      }
-//      else if (obscurity == OBSCURED_TOP_LEFT) {
-//         View.setLayout(Rez.Layouts.TopLeftQuad(dc));
-//         //            return LAYOUT_TOP_LEFT_QUAD;
-//      }
-//      else if (obscurity == OBSCURED_TOP_RIGHT) {
-//         View.setLayout(Rez.Layouts.TopRightQuad(dc));
-//         //            return LAYOUT_TOP_RIGHT_QUAD;
-//      }
-//      else if (obscurity == OBSCURED_BOT_LEFT) {
-//         View.setLayout(Rez.Layouts.BotLeftQuad(dc));
-//         //            return LAYOUT_BOT_LEFT_QUAD;
-//      }
-//      else if (obscurity == OBSCURED_BOT_RIGHT) {
-//         View.setLayout(Rez.Layouts.BotRightQuad(dc));
-//         //            return LAYOUT_BOT_RIGHT_QUAD;
-//      }
-//      else {
-//         View.setLayout(Rez.Layouts.TopHalf(dc));
-//         //            return LAYOUT_UNKNOWN;
-//      }
-//   }
-
-   function getLayoutName(dc,screenWidth,screenHeight,width,height,obscurity)
+   function setLayout(dc,width,height,obscurity)
    {
-      if (screenWidth == 215 && screenHeight == 180 ) {
+      var id = 1000*obscurity + width + height;
 
-         if (obscurity == OBSCURED_ALL) {
+      if (id == 15395 /*fr*/ || id == 15436 /*fx*/) {
             View.setLayout(Rez.Layouts.All(dc));
-//            return LAYOUT_ALL;
-         }
-         else if (obscurity == OBSCURED_TOP_LR && height == 89) {
-            View.setLayout(Rez.Layouts.TopHalf(dc));
-//            return LAYOUT_TOP_HALF;
-         }
-         else if (obscurity == OBSCURED_BOT_LR && height == 89) {
-            View.setLayout(Rez.Layouts.BotHalf(dc));
-//            return LAYOUT_BOT_HALF;
-         }
-         else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
-            View.setLayout(Rez.Layouts.TopThird(dc));
-//            return LAYOUT_TOP_THIRD;
-         }
-         else if (obscurity == OBSCURED_LR) {
-            View.setLayout(Rez.Layouts.MidThird(dc));
-//            return LAYOUT_MID_THIRD;
-         }
-         else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
-            View.setLayout(Rez.Layouts.BotThird(dc));
-//            return LAYOUT_BOT_THIRD;
-         }
-         else if (obscurity == OBSCURED_LEFT) {
-            View.setLayout(Rez.Layouts.LeftMidThird(dc));
-//            return LAYOUT_LEFT_MID_THIRD;
-         }
-         else if (obscurity == OBSCURED_RIGHT) {
-            View.setLayout(Rez.Layouts.RightMidThird(dc));
-//            return LAYOUT_RIGHT_MID_THIRD;
-         }
-         else {
-//            return LAYOUT_UNKNOWN; //TODO what?
-//            return LAYOUT_ALL;
-         }
       }
-//      else if (screenWidth == 218 && screenHeight == 218 ) {
-//
-//         if (obscurity == OBSCURED_ALL) {
-//            View.setLayout(Rez.Layouts.All(dc));
-////            return LAYOUT_ALL;
-//         }
-//         else if (obscurity == OBSCURED_TOP_LR && height == 108) {
-//            View.setLayout(Rez.Layouts.TopHalf(dc));
-////            return LAYOUT_TOP_HALF;
-//         }
-//         else if (obscurity == OBSCURED_BOT_LR && height == 108) {
-//            View.setLayout(Rez.Layouts.BotHalf(dc));
-////            return LAYOUT_BOT_HALF;
-//         }
-//         else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
-//            View.setLayout(Rez.Layouts.TopThird(dc));
-////            return LAYOUT_TOP_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_LR) {
-//            View.setLayout(Rez.Layouts.MidThird(dc));
-////            return LAYOUT_MID_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
-//            View.setLayout(Rez.Layouts.BotThird(dc));
-////            return LAYOUT_BOT_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_LEFT) {
-//            View.setLayout(Rez.Layouts.LeftMidThird(dc));
-////            return LAYOUT_LEFT_MID_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_RIGHT) {
-//            View.setLayout(Rez.Layouts.RightMidThird(dc));
-////            return LAYOUT_RIGHT_MID_THIRD ;
-//         }
-//         else if (obscurity == OBSCURED_TOP_LEFT) {
-//            View.setLayout(Rez.Layouts.TopLeftQuad(dc));
-////            return LAYOUT_TOP_LEFT_QUAD;
-//         }
-//         else if (obscurity == OBSCURED_TOP_RIGHT) {
-//            View.setLayout(Rez.Layouts.TopRightQuad(dc));
-////            return LAYOUT_TOP_RIGHT_QUAD;
-//         }
-//         else if (obscurity == OBSCURED_BOT_LEFT) {
-//            View.setLayout(Rez.Layouts.BotLeftQuad(dc));
-////            return LAYOUT_BOT_LEFT_QUAD;
-//         }
-//         else if (obscurity == OBSCURED_BOT_RIGHT) {
-//            View.setLayout(Rez.Layouts.BotRightQuad(dc));
-////            return LAYOUT_BOT_RIGHT_QUAD;
-//         }
-//         else {
-////            return LAYOUT_UNKNOWN;
-//         }
-//      }
-      
-//      return LAYOUT_UNKNOWN;
+      else if (id == 7304 /*fr*/ || id == 7326 /*fx*/) {
+            View.setLayout(Rez.Layouts.TopHalf(dc));
+      }
+      else if (id == 13304 /*fr*/ || id == 13326 /*fx*/) {
+            View.setLayout(Rez.Layouts.BotHalf(dc));
+      }
+      else if (id == 7270 /*fr*/ || id == 7288 /*fx*/) {
+            View.setLayout(Rez.Layouts.TopThird(dc));
+      }
+      else if (id == 5281 /*fr*/ || id == 5292 /*fx*/) {
+            View.setLayout(Rez.Layouts.MidThird(dc));
+      }
+      else if (id == 13270 /*fr*/ || id == 13288 /*fx*/) {
+            View.setLayout(Rez.Layouts.BotThird(dc));
+      }
+      else if (id == 1173 /*fr*/ || id == 1182 /*fx*/) {
+            View.setLayout(Rez.Layouts.LeftMidThird(dc));
+      }
+      else if (id == 4173 /*fr*/ || id == 4182 /*fx*/) {
+            View.setLayout(Rez.Layouts.RightMidThird(dc));
+      }
+      else if (id == 3216 /*fx*/) {
+            View.setLayout(Rez.Layouts.TopLeftQuad(dc));
+      }
+      else if (id == 6216 /*fx*/) {
+            View.setLayout(Rez.Layouts.TopRightQuad(dc));
+      }
+      else if (id == 9216 /*fx*/) {
+            View.setLayout(Rez.Layouts.BotLeftQuad(dc));
+      }
+      else if (id == 12216 /*fx*/) {
+            View.setLayout(Rez.Layouts.BotRightQuad(dc));
+      }
+      else {
+            View.setLayout(Rez.Layouts.All(dc));
+      }
    }
-
-//   function getLayoutName(screenWidth,screenHeight,width,height,obscurity)
-//   {
-//      var model = "unknown";
-//      
-//      if (screenWidth == 215 && screenHeight == 180 ) {
-//
-//         if (obscurity == OBSCURED_ALL) {
-//            model = LAYOUT_ALL;
-//         }
-//         else if (obscurity == OBSCURED_TOP_LR && height == 89) {
-//            model = LAYOUT_TOP_HALF;
-//         }
-//         else if (obscurity == OBSCURED_BOT_LR && height == 89) {
-//            model = LAYOUT_BOT_HALF;
-//         }
-//         else if (obscurity == OBSCURED_TOP_LR /* && height == 55*/) {
-//            model = LAYOUT_TOP_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_LR) {
-//            model = LAYOUT_MID_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_BOT_LR /* && height == 55*/) {
-//            model = LAYOUT_BOT_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_LEFT) {
-//            model = LAYOUT_LEFT_MID_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_RIGHT) {
-//            model = LAYOUT_RIGHT_MID_THIRD;
-//         }
-//         else {
-////            model = LAYOUT_UNKNOWN; //TODO what?
-//            model = LAYOUT_ALL;
-//         }
-//      }
-//      else if (screenWidth == 218 && screenHeight == 218 ) {
-//
-//         if (obscurity == OBSCURED_ALL) {
-//            model = LAYOUT_ALL;
-//         }
-//         else if (obscurity == OBSCURED_TOP_LR && height == 108) {
-//            model = LAYOUT_TOP_HALF;
-//         }
-//         else if (obscurity == OBSCURED_BOT_LR && height == 108) {
-//            model = LAYOUT_BOT_HALF;
-//         }
-//         else if (obscurity == OBSCURED_TOP_LR /* && height == 70*/) {
-//            model = LAYOUT_TOP_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_LR) {
-//            model = LAYOUT_MID_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_BOT_LR /* && height == 70*/) {
-//            model = LAYOUT_BOT_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_LEFT) {
-//            model = LAYOUT_LEFT_MID_THIRD;
-//         }
-//         else if (obscurity == OBSCURED_RIGHT) {
-//            model = LAYOUT_RIGHT_MID_THIRD ;
-//         }
-//         else if (obscurity == OBSCURED_TOP_LEFT) {
-//            model = LAYOUT_TOP_LEFT_QUAD;
-//         }
-//         else if (obscurity == OBSCURED_TOP_RIGHT) {
-//            model = LAYOUT_TOP_RIGHT_QUAD;
-//         }
-//         else if (obscurity == OBSCURED_BOT_LEFT) {
-//            model = LAYOUT_BOT_LEFT_QUAD;
-//         }
-//         else if (obscurity == OBSCURED_BOT_RIGHT) {
-//            model = LAYOUT_BOT_RIGHT_QUAD;
-//         }
-//         else {
-//            model = LAYOUT_UNKNOWN;
-//         }
-//      }
-//      
-//      return model;
-//   }
 }

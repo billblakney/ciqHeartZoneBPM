@@ -6,7 +6,7 @@
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
         	<param name="center_y">90</param>
-        	<param name="radius">90</param>
+        	<param name="font">Gfx.FONT_NUMBER_THAI_HOT</param>
         </drawable>
     </layout>
     <layout id="TopHalf">
@@ -14,7 +14,7 @@
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
         	<param name="center_y">90</param>
-        	<param name="radius">90</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
     <layout id="BotHalf">
@@ -22,7 +22,7 @@
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
         	<param name="center_y">0</param>
-	        <param name="radius">90</param>
+	        <param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
     <layout id="TopThird">
@@ -30,7 +30,7 @@
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
         	<param name="center_y">90</param>
-        	<param name="radius">90</param>
+        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
         </drawable>
     </layout>
     <layout id="MidThird">
@@ -38,7 +38,7 @@
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
         	<param name="center_y">33</param>
-        	<param name="radius">90</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
     <layout id="LeftMidThird">
@@ -46,7 +46,7 @@
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
         	<param name="center_y">33</param>
-        	<param name="radius">90</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
     <layout id="RightMidThird">
@@ -54,7 +54,7 @@
         <drawable id="Background" class="Background" >
         	<param name="center_x">0</param>
         	<param name="center_y">33</param>
-        	<param name="radius">90</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
     <layout id="BotThird">
@@ -62,7 +62,7 @@
         <drawable id="Background" class="Background" >
         	<param name="center_x">107</param>
         	<param name="center_y">0-34</param>
-	        <param name="radius">90</param>
+	        <param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
         </drawable>
     </layout>
 </layouts>

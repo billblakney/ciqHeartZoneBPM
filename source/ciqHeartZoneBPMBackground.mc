@@ -1,6 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
 using Toybox.Graphics as Gfx;
+using Toybox.System as Sys;
 
 class Background extends Ui.Drawable {
 
@@ -8,7 +9,7 @@ class Background extends Ui.Drawable {
     hidden var mBorderColor;
     hidden var mCenterX;
     hidden var mCenterY;
-    hidden var mRadius;
+    hidden var mFont;
 
     function initialize(params)
     {
@@ -20,7 +21,7 @@ class Background extends Ui.Drawable {
 
         mCenterX = params.get(:center_x);
         mCenterY = params.get(:center_y);
-        mRadius = params.get(:radius);
+        mFont = params.get(:font);
     }
 
     function setBackColor(color) {
@@ -35,7 +36,11 @@ class Background extends Ui.Drawable {
         dc.setColor(Gfx.COLOR_TRANSPARENT, mBorderColor);
         dc.clear();
         dc.setColor(mBackColor,mBackColor);
-        dc.fillCircle(mCenterX,mCenterY,mRadius);
+//var height = Gfx.getFontHeight(mFont);
+//var width = Gfx.getFontWidth(mFont);
+var dims = dc.getTextDimensions("888", mFont);
+Sys.println("TEXT w,h: " + dims[0] + "," + dims[1]);
+//        dc.fillCircle(mCenterX,mCenterY,mFont);
     }
 
 }
