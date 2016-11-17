@@ -33,13 +33,11 @@ class Background extends Ui.Drawable {
     }
 
     function draw(dc) {
-        dc.setColor(Gfx.COLOR_TRANSPARENT, mBorderColor);
-        dc.clear();
-        dc.setColor(mBackColor,mBackColor);
+//        dc.setColor(mBackColor,mBackColor);
 //var height = Gfx.getFontHeight(mFont);
 //var width = Gfx.getFontWidth(mFont);
-var dims = dc.getTextDimensions("888", mFont);
-Sys.println("TEXT w,h: " + dims[0] + "," + dims[1]);
+//var dims = dc.getTextDimensions("888", mFont);
+//Sys.println("TEXT w,h: " + dims[0] + "," + dims[1]);
 //        dc.fillCircle(mCenterX,mCenterY,mFont);
     }
 
