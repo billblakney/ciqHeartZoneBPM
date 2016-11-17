@@ -5,6 +5,21 @@ using Toybox.UserProfile as Profile;
 
 class ciqHeartZoneBPMView extends Ui.DataField
 {
+   const COLOR_IDX_WHITE    = 0;
+   const COLOR_IDX_LT_GRAY  = 1;
+   const COLOR_IDX_DK_GRAY  = 2;
+   const COLOR_IDX_BLACK    = 3;
+   const COLOR_IDX_RED      = 4;
+   const COLOR_IDX_DK_RED   = 5;
+   const COLOR_IDX_ORANGE   = 6;
+   const COLOR_IDX_YELLOW   = 7;
+   const COLOR_IDX_GREEN    = 8;
+   const COLOR_IDX_DK_GREEN = 9;
+   const COLOR_IDX_BLUE     = 10;
+   const COLOR_IDX_DK_BLUE  = 11;
+   const COLOR_IDX_PURPLE   = 12;
+   const COLOR_IDX_PINK     = 13;
+
    /** default back/foreground colors */
    var defaultBgColor = Gfx.COLOR_WHITE;
    var defaultFgColor = Gfx.COLOR_BLACK;
@@ -27,6 +42,14 @@ class ciqHeartZoneBPMView extends Ui.DataField
 
    /** monitored heart rate */
    hidden var mHeartRate;
+
+   /**
+    * zone and zone colors for update
+    * (could move to update to save some bytes)
+    */
+   hidden var zone;
+   hidden var zoneBgColor;
+   hidden var zoneFgColor;
 
    /** drawable for background */
    hidden var background;
@@ -106,16 +129,16 @@ class ciqHeartZoneBPMView extends Ui.DataField
       var zone5BgColorNum = App.getApp().getProperty("z5BgColor");
       var zone5FgColorNum = App.getApp().getProperty("z5FgColor");
 
-//      zoneColors[0] = getColorCode(zone1BgColorNum);
-//      zoneColors[1] = getColorCode(zone1FgColorNum);
-//      zoneColors[2] = getColorCode(zone2BgColorNum);
-//      zoneColors[3] = getColorCode(zone2FgColorNum);
-//      zoneColors[4] = getColorCode(zone3BgColorNum);
-//      zoneColors[5] = getColorCode(zone3FgColorNum);
-//      zoneColors[6] = getColorCode(zone4BgColorNum);
-//      zoneColors[7] = getColorCode(zone4FgColorNum);
-//      zoneColors[8] = getColorCode(zone5BgColorNum);
-//      zoneColors[9] = getColorCode(zone5FgColorNum);
+      zoneColors[0] = getColorCode(zone1BgColorNum);
+      zoneColors[1] = getColorCode(zone1FgColorNum);
+      zoneColors[2] = getColorCode(zone2BgColorNum);
+      zoneColors[3] = getColorCode(zone2FgColorNum);
+      zoneColors[4] = getColorCode(zone3BgColorNum);
+      zoneColors[5] = getColorCode(zone3FgColorNum);
+      zoneColors[6] = getColorCode(zone4BgColorNum);
+      zoneColors[7] = getColorCode(zone4FgColorNum);
+      zoneColors[8] = getColorCode(zone5BgColorNum);
+      zoneColors[9] = getColorCode(zone5FgColorNum);
    }
    
    /*-------------------------------------------------------------------------
@@ -168,6 +191,24 @@ class ciqHeartZoneBPMView extends Ui.DataField
                 mHeartRate = 0;
             }
         }
+
+hiliteZone = 1;
+       zone = getZone(mHeartRate);
+
+       // get zone background color
+       zoneBgColor = defaultBgColor;
+       if (zone >= hiliteZone) {
+          zoneBgColor = zoneColors[2*(zone-1)];
+       }
+
+       // get zone foreground color
+       zoneFgColor = defaultFgColor;
+       if (zone >= hiliteZone) {
+          zoneFgColor = zoneColors[2*(zone-1)+1];
+       }
+
+       //Sys.println("zone,bg,fg: "
+       //   + zone + "," + zoneBgColor + "," + zoneFgColor);
     }
 
    /*-------------------------------------------------------------------------
@@ -179,38 +220,31 @@ class ciqHeartZoneBPMView extends Ui.DataField
        dc.setColor(defaultFgColor,defaultBgColor);
        dc.clear();
 
-hiliteZone = 1;
-       var zone = getZone(mHeartRate);
-
-       // get zone background color
-       var zoneBgColor = defaultBgColor;
-       if (zone >= hiliteZone) {
-          zoneBgColor = zoneColors[2*(zone-1)];
-       }
-
-       // get zone foreground color
-       var zoneFgColor = defaultFgColor;
-       if (zone >= hiliteZone) {
-          zoneFgColor = zoneColors[2*(zone-1)+1];
-       }
-
-       //Sys.println("zone,bg,fg: "
-       //   + zone + "," + zoneBgColor + "," + zoneFgColor);
-
        /*
         * Draw backdrop. If below the hilite zone, fill with the default bg
         * color, and draw text with default fg color.
         */
-       if (background != null) {
-          background.setBorderColor(zoneBgColor);
-          if (zone < hiliteZone) {
-             background.setBackColor(defaultBgColor);
-          }
-          else {
-             background.setBackColor(zoneBgColor);
-          }
-          background.draw(dc);
+//       if (background != null) {
+//          background.setBorderColor(zoneBgColor);
+//          if (zone < hiliteZone) {
+//             background.setBackColor(defaultBgColor);
+//          }
+//          else {
+//             background.setBackColor(zoneBgColor);
+//          }
+//          background.draw(dc);
+//       }
+       
+       /*
+        * Fill background.
+        */
+       if (zone < hiliteZone) {
+          dc.setColor(Gfx.COLOR_TRANSPARENT, defaultBgColor);
        }
+       else {
+          dc.setColor(Gfx.COLOR_TRANSPARENT, zoneBgColor);
+       }
+       dc.clear();
 
        /*
         * Draw the heart rate.
@@ -280,6 +314,58 @@ hiliteZone = 1;
          return "" + o;
       } else {
          return "---";
+      }
+   }
+
+   /*-------------------------------------------------------------------------
+    *------------------------------------------------------------------------*/
+   function getColorCode(color_index) {
+
+      if (color_index == COLOR_IDX_WHITE) {
+         return Graphics.COLOR_WHITE;
+      }
+      else if (color_index == COLOR_IDX_LT_GRAY) {
+         return Graphics.COLOR_LT_GRAY;
+      }
+      else if (color_index == COLOR_IDX_DK_GRAY) {
+         return Graphics.COLOR_DK_GRAY;
+      }
+      else if (color_index == COLOR_IDX_BLACK) {
+         return Graphics.COLOR_BLACK;
+      }
+      else if (color_index == COLOR_IDX_RED) {
+         return Graphics.COLOR_RED;
+      }
+      else if (color_index == COLOR_IDX_DK_RED) {
+         return Graphics.COLOR_DK_RED;
+      }
+      else if (color_index == COLOR_IDX_ORANGE) {
+         return Graphics.COLOR_ORANGE;
+      }
+      else if (color_index == COLOR_IDX_YELLOW) {
+         return Graphics.COLOR_YELLOW;
+      }
+      else if (color_index == COLOR_IDX_GREEN) {
+         return Graphics.COLOR_GREEN;
+      }
+      else if (color_index == COLOR_IDX_DK_GREEN) {
+         return Graphics.COLOR_DK_GREEN;
+      }
+      else if (color_index == COLOR_IDX_BLUE) {
+         return Graphics.COLOR_BLUE;
+      }
+      else if (color_index == COLOR_IDX_DK_BLUE) {
+         return Graphics.COLOR_DK_BLUE;
+      }
+      else if (color_index == COLOR_IDX_PURPLE) {
+         return Graphics.COLOR_PURPLE;
+      }
+      else if (color_index == COLOR_IDX_PINK) {
+         return Graphics.COLOR_PINK;
+      }
+      else {
+         return Graphics.COLOR_ORANGE;
+         Sys.println("ERROR: unknown color: " + color_index);
       }
    }
 
