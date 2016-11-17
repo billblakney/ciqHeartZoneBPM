@@ -1,0 +1,212 @@
+<resources>
+<!--
+    <bitmaps>
+        <bitmap id="id_monkey" filename="images/monkey.png" />
+    </bitmaps>
+-->
+    <properties>
+        <!-- lowest hilite z -->
+        <property id="hiliteZone" type="number">1</property>
+        <!-- display settings -->
+        <property id="useBlackBack" type="boolean">false</property>
+        <!-- heart rate zone colors -->
+        <property id="z1BgColor" type="number">8</property>
+        <property id="z1FgColor" type="number">3</property>
+        <property id="z2BgColor" type="number">7</property>
+        <property id="z2FgColor" type="number">3</property>
+        <property id="z3BgColor" type="number">6</property>
+        <property id="z3FgColor" type="number">0</property>
+        <property id="z4BgColor" type="number">4</property>
+        <property id="z4FgColor" type="number">0</property>
+        <property id="z5BgColor" type="number">5</property>
+        <property id="z5FgColor" type="number">0</property>
+    </properties>
+    <settings>
+        <setting propertyKey="@Properties.hiliteZone" title="@Strings.HiliteZone" prompt="@Strings.PromptHiliteZone">
+           <settingConfig type="numeric" min="1" max="6"/>
+        </setting>
+        <setting propertyKey="@Properties.useBlackBack" title="@Strings.UseBlackBack" prompt="@Strings.PromptUseBlackBack">
+           <settingConfig type="boolean"/>
+        </setting>
+        <setting propertyKey="@Properties.z1BgColor" title="@Strings.Z1BgColor" prompt="@Strings.PromptZ1BgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.z1FgColor" title="@Strings.Z1FgColor" prompt="@Strings.PromptZ1FgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.z2BgColor" title="@Strings.Z2BgColor" prompt="@Strings.PromptZ2BgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.z2FgColor" title="@Strings.Z2FgColor" prompt="@Strings.PromptZ2FgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.z3BgColor" title="@Strings.Z3BgColor" prompt="@Strings.PromptZ3BgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.z3FgColor" title="@Strings.Z3FgColor" prompt="@Strings.PromptZ3FgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.z4BgColor" title="@Strings.Z4BgColor" prompt="@Strings.PromptZ4BgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.z4FgColor" title="@Strings.Z4FgColor" prompt="@Strings.PromptZ4FgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.z5BgColor" title="@Strings.Z5BgColor" prompt="@Strings.PromptZ5BgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+        <setting propertyKey="@Properties.z5FgColor" title="@Strings.Z5FgColor" prompt="@Strings.PromptZ5FgColor">
+           <settingConfig type="list">
+           		<listEntry value="0">@Strings.WhiteColor</listEntry>
+           		<listEntry value="1">@Strings.LightGrayColor</listEntry>
+           		<listEntry value="2">@Strings.DarkGrayColor</listEntry>
+           		<listEntry value="3">@Strings.BlackColor</listEntry>
+           		<listEntry value="4">@Strings.RedColor</listEntry>
+           		<listEntry value="5">@Strings.DarkRedColor</listEntry>
+           		<listEntry value="6">@Strings.OrangeColor</listEntry>
+           		<listEntry value="7">@Strings.YellowColor</listEntry>
+           		<listEntry value="8">@Strings.GreenColor</listEntry>
+           		<listEntry value="9">@Strings.DarkGreenColor</listEntry>
+           		<listEntry value="10">@Strings.BlueColor</listEntry>
+           		<listEntry value="11">@Strings.DarkBlueColor</listEntry>
+           		<listEntry value="12">@Strings.PurpleColor</listEntry>
+           		<listEntry value="13">@Strings.PinkColor</listEntry>
+           </settingConfig>
+        </setting>
+    </settings>
+</resources>

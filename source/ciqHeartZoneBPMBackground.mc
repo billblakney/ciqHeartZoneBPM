@@ -1,36 +1,36 @@
 using Toybox.WatchUi as Ui;
-using Toybox.Application as App;
-using Toybox.Graphics as Gfx;
-using Toybox.System as Sys;
+//using Toybox.Application as App;
+//using Toybox.Graphics as Gfx;
+//using Toybox.System as Sys;
 
 class Background extends Ui.Drawable {
 
-    hidden var mBackColor;
-    hidden var mBorderColor;
-    hidden var mCenterX;
-    hidden var mCenterY;
-    hidden var mFont;
+//    hidden var mBackColor;
+//    hidden var mBorderColor;
+//    hidden var mCenterX;
+//    hidden var mCenterY;
+//    hidden var mFont;
 
     function initialize(params)
     {
-        Drawable.initialize(params);
+//        Drawable.initialize(params);
 
 //        var dictionary = {
 //            :identifier => "Background"
 //        };
 
-        mCenterX = params.get(:center_x);
-        mCenterY = params.get(:center_y);
-        mFont = params.get(:font);
+//        mCenterX = params.get(:center_x);
+//        mCenterY = params.get(:center_y);
+//        mFont = params.get(:font);
     }
 
-    function setBackColor(color) {
-        mBackColor = color;
-    }
-
-    function setBorderColor(color) {
-        mBorderColor = color;
-    }
+//    function setBackColor(color) {
+//        mBackColor = color;
+//    }
+//
+//    function setBorderColor(color) {
+//        mBorderColor = color;
+//    }
 
     function draw(dc) {
 //        dc.setColor(mBackColor,mBackColor);
