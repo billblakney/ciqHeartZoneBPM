@@ -97,9 +97,9 @@ class ciqHeartZoneBPMView extends Ui.DataField
 //      zoneColors[8] = 5;
 //      zoneColors[9] = 0;
 
-      zoneColors[0] = Gfx.COLOR_BLUE;
+      zoneColors[0] = Gfx.COLOR_GREEN;
       zoneColors[1] = Gfx.COLOR_BLACK;
-      zoneColors[2] = Gfx.COLOR_BLUE;
+      zoneColors[2] = Gfx.COLOR_GREEN;
       zoneColors[3] = Gfx.COLOR_BLACK;
       zoneColors[4] = Gfx.COLOR_ORANGE;
       zoneColors[5] = Gfx.COLOR_WHITE;

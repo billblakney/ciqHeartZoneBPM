@@ -1,7 +1,11 @@
 <layouts>
     <!-- A generic, centered layout. -->
     <layout id="All">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_THAI_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_THAI_HOT</param>
+        </drawable>
     </layout>
     <layout id="TopHalf">
         <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />

@@ -1,40 +1,99 @@
 <!-- layouts for round-218x218 -->
 <layouts>
-    <!-- A generic, centered layout. -->
+
     <layout id="All">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_RED" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_THAI_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_THAI_HOT</param>
+        </drawable>
     </layout>
+
     <layout id="TopHalf">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
+
     <layout id="BotHalf">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
+
     <layout id="TopThird">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
+        </drawable>
     </layout>
+
     <layout id="MidThird">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
+
     <layout id="LeftMidThird">
-        <label id="value" x="60" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
+
     <layout id="RightMidThird">
-        <label id="value" x="40" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
+
     <layout id="BotThird">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
+        </drawable>
     </layout>
+
     <layout id="TopLeftQuad"> <!-- center is 54,24 -->
-        <label id="value" x="60" y="20" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">60</param>
+        	<param name="y">62</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
+
     <layout id="TopRightQuad"> <!-- center is 54,24 -->
-        <label id="value" x="38" y="20" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">38</param>
+        	<param name="y">62</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
+
     <layout id="BotLeftQuad"> <!-- center is 54,24 -->
-        <label id="value" x="60" y="0" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">60</param>
+        	<param name="y">38</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
+
     <layout id="BotRightQuad"> <!-- center is 54,24 -->
-        <label id="value" x="38" y="0" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Background" class="Background" >
+        	<param name="x">38</param>
+        	<param name="y">38</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
 </layouts>
