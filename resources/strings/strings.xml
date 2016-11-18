@@ -1,13 +1,10 @@
 <strings>
     <string id="AppName">HeartZoneBPM</string>
+    <!-- -->
     <!-- lowest hilite zone title -->
+    <!-- -->
     <string id="HiliteZone">Lowest Color Zone</string>
     <string id="PromptHiliteZone">Zone at which HR field gets colored</string>
-    <!-- -->
-    <!--   > general display settings -->
-    <!-- -->
-    <string id="UseBlackBack">Use Black Background</string>
-    <string id="PromptUseBlackBack">Use Black Background</string>
     <!-- -->
     <!--   > zone colors -->
     <!-- -->

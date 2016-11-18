@@ -7,8 +7,6 @@
     <properties>
         <!-- lowest hilite z -->
         <property id="hiliteZone" type="number">1</property>
-        <!-- display settings -->
-        <property id="useBlackBack" type="boolean">false</property>
         <!-- heart rate zone colors -->
         <property id="z1BgColor" type="number">8</property>
         <property id="z1FgColor" type="number">3</property>
@@ -24,9 +22,6 @@
     <settings>
         <setting propertyKey="@Properties.hiliteZone" title="@Strings.HiliteZone" prompt="@Strings.PromptHiliteZone">
            <settingConfig type="numeric" min="1" max="6"/>
-        </setting>
-        <setting propertyKey="@Properties.useBlackBack" title="@Strings.UseBlackBack" prompt="@Strings.PromptUseBlackBack">
-           <settingConfig type="boolean"/>
         </setting>
         <setting propertyKey="@Properties.z1BgColor" title="@Strings.Z1BgColor" prompt="@Strings.PromptZ1BgColor">
            <settingConfig type="list">

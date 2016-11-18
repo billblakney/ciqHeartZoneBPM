@@ -2,6 +2,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.System as Sys;
 using Toybox.UserProfile as Profile;
+using Toybox.Application as App;
 
 class HeartZoneBPMView extends Ui.DataField
 {
@@ -21,8 +22,8 @@ class HeartZoneBPMView extends Ui.DataField
    const COLOR_IDX_PINK     = 13;
 
    /** default back/foreground colors */
-   var defaultBgColor = Gfx.COLOR_WHITE;
-   var defaultFgColor = Gfx.COLOR_BLACK;
+   var defaultBgColor;
+   var defaultFgColor;
 
    /** heart zone definitions */
    var beginZone1;
@@ -54,9 +55,6 @@ class HeartZoneBPMView extends Ui.DataField
    /** drawable */
    hidden var painter;
 
-   /** drawable for value */
-   hidden var value; //TODO rm
-
    /*-------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
    function initialize()
@@ -64,10 +62,20 @@ class HeartZoneBPMView extends Ui.DataField
       DataField.initialize();
 
       mHeartRate = 0;
+      
+      defaultBgColor = getBackgroundColor();
+      if (defaultBgColor == Gfx.COLOR_WHITE) {
+         defaultFgColor = Gfx.COLOR_BLACK;
+      }
+      else {
+         defaultFgColor = Gfx.COLOR_WHITE;
+      }
            
       initializeZoneColors();
 
       getZonesFromUserProfile();
+
+      getUserSettings();
    }
 
    /*-------------------------------------------------------------------------
@@ -75,28 +83,6 @@ class HeartZoneBPMView extends Ui.DataField
     *------------------------------------------------------------------------*/
    function initializeZoneColors()
    {
-//      zoneColors[0] = Gfx.COLOR_WHITE;
-//      zoneColors[1] = Gfx.COLOR_BLACK;
-//      zoneColors[2] = Gfx.COLOR_WHITE;
-//      zoneColors[3] = Gfx.COLOR_BLACK;
-//      zoneColors[4] = Gfx.COLOR_WHITE;
-//      zoneColors[5] = Gfx.COLOR_BLACK;
-//      zoneColors[6] = Gfx.COLOR_WHITE;
-//      zoneColors[7] = Gfx.COLOR_BLACK;
-//      zoneColors[8] = Gfx.COLOR_WHITE;
-//      zoneColors[9] = Gfx.COLOR_BLACK;
-
-//      zoneColors[0] = 8;
-//      zoneColors[1] = 3;
-//      zoneColors[2] = 7;
-//      zoneColors[3] = 3;
-//      zoneColors[4] = 6;
-//      zoneColors[5] = 0;
-//      zoneColors[6] = 4;
-//      zoneColors[7] = 0;
-//      zoneColors[8] = 5;
-//      zoneColors[9] = 0;
-
       zoneColors[0] = Gfx.COLOR_GREEN;
       zoneColors[1] = Gfx.COLOR_BLACK;
       zoneColors[2] = Gfx.COLOR_GREEN;
@@ -114,9 +100,7 @@ class HeartZoneBPMView extends Ui.DataField
    function getUserSettings() {
 
       hiliteZone = App.getApp().getProperty("hiliteZone");
-//      Sys.println("hiliteZone: " + hiliteZone);
-
-      useBlackBack = App.getApp().getProperty("useBlackBack");
+      Sys.println("hiliteZone: " + hiliteZone);
 
       var zone1BgColorNum = App.getApp().getProperty("z1BgColor");
       var zone1FgColorNum = App.getApp().getProperty("z1FgColor");
@@ -170,13 +154,10 @@ class HeartZoneBPMView extends Ui.DataField
       var obscurityFlags = DataField.getObscurityFlags();
       
       setLayout(dc,width,height,obscurityFlags);
-      
 //      Sys.println("layout: " + layout);
       
       painter = View.findDrawableById("Painter");
       painter.normalize(width,height);
-
-      value = View.findDrawableById("value");
       
       return true;
    }
@@ -185,7 +166,7 @@ class HeartZoneBPMView extends Ui.DataField
     *------------------------------------------------------------------------*/
     function compute(info)
     {
-        // See Activity.Info in the documentation for available information.
+        // Get the current heart rate.
         if(info has :currentHeartRate){
             if(info.currentHeartRate != null){
                 mHeartRate = info.currentHeartRate;
@@ -194,20 +175,10 @@ class HeartZoneBPMView extends Ui.DataField
             }
         }
 
-hiliteZone = 1;
+       // Get zone and zone colors.
        zone = getZone(mHeartRate);
-
-       // get zone background color
-       zoneBgColor = defaultBgColor;
-       if (zone >= hiliteZone) {
-          zoneBgColor = zoneColors[2*(zone-1)];
-       }
-
-       // get zone foreground color
-       zoneFgColor = defaultFgColor;
-       if (zone >= hiliteZone) {
-          zoneFgColor = zoneColors[2*(zone-1)+1];
-       }
+       zoneBgColor = zoneColors[2*(zone-1)];
+       zoneFgColor = zoneColors[2*(zone-1)+1];
 
        //Sys.println("zone,bg,fg: "
        //   + zone + "," + zoneBgColor + "," + zoneFgColor);
@@ -223,27 +194,14 @@ hiliteZone = 1;
         * Set dc colors.
         */
        if (zone < hiliteZone) {
-          dc.setColor(defaultFgColor, defaultBgColor);
+          painter.drawBackground(dc,defaultBgColor);
+          painter.drawZoneBar(dc,zoneBgColor);
+          painter.drawText(dc,defaultFgColor,toStr(mHeartRate));
        }
        else {
-          dc.setColor(zoneFgColor, zoneBgColor);
+          painter.drawBackground(dc,zoneBgColor);
+          painter.drawText(dc,zoneFgColor,toStr(mHeartRate));
        }
-       dc.clear();
-
-       /*
-        * Draw the display.
-        */
-//       painter.draw(dc,toStr(mHeartRate));
-
-// zone bar
-       painter.drawBackground(dc,defaultBgColor);
-       painter.drawZoneBar(dc,zoneBgColor);
-       painter.drawText(dc,defaultFgColor,toStr(mHeartRate));
-
-// rounded rect
-//       painter.drawBackground(dc,zoneBgColor);
-//       painter.drawTextBg(dc,defaultBgColor,toStr(mHeartRate));
-//       painter.drawText(dc,defaultFgColor,toStr(mHeartRate));
     }
 
 //   /*-------------------------------------------------------------------------

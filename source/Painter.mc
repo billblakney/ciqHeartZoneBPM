@@ -16,10 +16,6 @@ class Painter extends Ui.Drawable {
     {
         Drawable.initialize(params);
 
-//        var dictionary = {
-//            :identifier => "Painter"
-//        };
-
         mX = params.get(:x);
         mY = params.get(:y);
         mFont = params.get(:font);
@@ -78,22 +74,8 @@ class Painter extends Ui.Drawable {
        }
     }
 
-//    function drawTextBg(dc,color,txt) {
-//       dc.setColor(color,color);
-//       var dims = dc.getTextDimensions(txt,mFont);
-//       var txtW = 1.2 * dims[0];
-//       var txtH = 1.2 * dims[1];
-//       dc.fillRoundedRectangle(mX-txtW/2,mY-txtH/2,txtW,txtH,txtH/5);
-//    }
-
     function drawText(dc,color,txt) {
        dc.setColor(color,Gfx.COLOR_TRANSPARENT);
        dc.drawText(mX, mY, mFont, txt, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
     }
-
-//    function draw(dc,txt) {
-//       dc.clear();
-//       dc.fillRectangle(0,0,mWidth,10);
-//       dc.drawText(mX, mY, mFont, txt, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
-//    }
 }
