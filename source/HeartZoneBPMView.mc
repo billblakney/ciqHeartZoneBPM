@@ -3,7 +3,7 @@ using Toybox.Graphics as Gfx;
 using Toybox.System as Sys;
 using Toybox.UserProfile as Profile;
 
-class ciqHeartZoneBPMView extends Ui.DataField
+class HeartZoneBPMView extends Ui.DataField
 {
    const COLOR_IDX_WHITE    = 0;
    const COLOR_IDX_LT_GRAY  = 1;

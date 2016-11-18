@@ -1,5 +1,5 @@
 <strings>
-    <string id="AppName">ciqHeartZoneBPM</string>
+    <string id="AppName">HeartZoneBPM</string>
     <!-- lowest hilite zone title -->
     <string id="HiliteZone">Lowest Color Zone</string>
     <string id="PromptHiliteZone">Zone at which HR field gets colored</string>

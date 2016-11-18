@@ -1,6 +1,6 @@
 using Toybox.Application as App;
 
-class ciqHeartZoneBPMApp extends App.AppBase {
+class HeartZoneBPMApp extends App.AppBase {
 
     function initialize() {
         AppBase.initialize();
@@ -16,7 +16,7 @@ class ciqHeartZoneBPMApp extends App.AppBase {
 
     //! Return the initial view of your application here
     function getInitialView() {
-        return [ new ciqHeartZoneBPMView() ];
+        return [ new HeartZoneBPMView() ];
     }
 
 }
