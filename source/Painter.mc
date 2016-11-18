@@ -2,8 +2,6 @@ using Toybox.WatchUi as Ui;
 
 class Painter extends Ui.Drawable {
 
-//    hidden var mBackColor;
-//    hidden var mBorderColor;
     hidden var mX;
     hidden var mY;
     hidden var mFont;
@@ -31,24 +29,9 @@ class Painter extends Ui.Drawable {
        }
     }
 
-//    function setBackColor(color) {
-//        mBackColor = color;
-//    }
-//
-//    function setBorderColor(color) {
-//        mBorderColor = color;
-//    }
-
     function draw(dc,txt) {
-//       dc.setColor(fgColor,bgColor);
+
        dc.clear();
        dc.drawText(mX, mY, mFont, txt, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
-//        dc.setColor(fgColor,bgColor);
-//var height = Gfx.getFontHeight(mFont);
-//var width = Gfx.getFontWidth(mFont);
-//var dims = dc.getTextDimensions("888", mFont);
-//Sys.println("TEXT w,h: " + dims[0] + "," + dims[1]);
-//        dc.fillCircle(mX,mY,mFont);
     }
-
 }

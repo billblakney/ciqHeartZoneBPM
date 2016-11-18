@@ -219,57 +219,20 @@ hiliteZone = 1;
     *------------------------------------------------------------------------*/
     function onUpdate(dc)
     {
-/*
-       dc.setColor(defaultFgColor,defaultBgColor);
-       dc.clear();
-*/
-
        /*
-        * Draw backdrop. If below the hilite zone, fill with the default bg
-        * color, and draw text with default fg color.
-        */
-//       if (painter != null) {
-//          painter.setBorderColor(zoneBgColor);
-//          if (zone < hiliteZone) {
-//             painter.setBackColor(defaultBgColor);
-//          }
-//          else {
-//             painter.setBackColor(zoneBgColor);
-//          }
-//          painter.draw(dc);
-//       }
-       
-       /*
-        * Fill background.
+        * Set dc colors.
         */
        if (zone < hiliteZone) {
-//          dc.setColor(Gfx.COLOR_TRANSPARENT, defaultBgColor);
           dc.setColor(defaultFgColor, defaultBgColor);
        }
        else {
-//          dc.setColor(Gfx.COLOR_TRANSPARENT, zoneBgColor);
           dc.setColor(zoneFgColor, zoneBgColor);
        }
        dc.clear();
 
        /*
-        * Draw the heart rate.
+        * Draw the display.
         */
-/*
-       value.setText(toStr(mHeartRate));
-       //        value.setText(mHeartRate.format("%2f"));
-       if (zone < hiliteZone) {
-          value.setColor(defaultFgColor);
-       }
-       else {
-          value.setColor(zoneFgColor);
-       }
-       value.draw(dc);
-*/
-
-/*
-textC(dc, value.locX, value.locY,Gfx.FONT_NUMBER_HOT, toStr(mHeartRate));
-*/
        painter.draw(dc,toStr(mHeartRate));
     }
 
@@ -334,7 +297,6 @@ textC(dc, value.locX, value.locY,Gfx.FONT_NUMBER_HOT, toStr(mHeartRate));
     *------------------------------------------------------------------------*/
    function textC(dc, x, y, font, s) {
       if (s != null) {
-//         dc.drawText(x, y, font, s, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
          dc.drawText(x, y, font, s, Graphics.TEXT_JUSTIFY_CENTER);
       }
    }
