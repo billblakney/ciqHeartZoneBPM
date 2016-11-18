@@ -1,6 +1,6 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
-using Toybox.System as Sys;
+//using Toybox.System as Sys;
 using Toybox.UserProfile as Profile;
 using Toybox.Application as App;
 
@@ -100,7 +100,7 @@ class HeartZoneBPMView extends Ui.DataField
    function getUserSettings() {
 
       hiliteZone = App.getApp().getProperty("hiliteZone");
-      Sys.println("hiliteZone: " + hiliteZone);
+//      Sys.println("hiliteZone: " + hiliteZone);
 
       var zone1BgColorNum = App.getApp().getProperty("z1BgColor");
       var zone1FgColorNum = App.getApp().getProperty("z1FgColor");
@@ -317,7 +317,7 @@ class HeartZoneBPMView extends Ui.DataField
       }
       else {
          return Graphics.COLOR_ORANGE;
-         Sys.println("ERROR: unknown color: " + color_index);
+//         Sys.println("ERROR: unknown color: " + color_index);
       }
    }
 
