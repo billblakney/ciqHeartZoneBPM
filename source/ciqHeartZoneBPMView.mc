@@ -174,6 +174,8 @@ class ciqHeartZoneBPMView extends Ui.DataField
 //      Sys.println("layout: " + layout);
       
       background = View.findDrawableById("Background");
+      background.normalize(width,height);
+
       value = View.findDrawableById("value");
       
       return true;
@@ -217,8 +219,10 @@ hiliteZone = 1;
     *------------------------------------------------------------------------*/
     function onUpdate(dc)
     {
+/*
        dc.setColor(defaultFgColor,defaultBgColor);
        dc.clear();
+*/
 
        /*
         * Draw backdrop. If below the hilite zone, fill with the default bg
@@ -239,16 +243,19 @@ hiliteZone = 1;
         * Fill background.
         */
        if (zone < hiliteZone) {
-          dc.setColor(Gfx.COLOR_TRANSPARENT, defaultBgColor);
+//          dc.setColor(Gfx.COLOR_TRANSPARENT, defaultBgColor);
+          dc.setColor(defaultFgColor, defaultBgColor);
        }
        else {
-          dc.setColor(Gfx.COLOR_TRANSPARENT, zoneBgColor);
+//          dc.setColor(Gfx.COLOR_TRANSPARENT, zoneBgColor);
+          dc.setColor(zoneFgColor, zoneBgColor);
        }
        dc.clear();
 
        /*
         * Draw the heart rate.
         */
+/*
        value.setText(toStr(mHeartRate));
        //        value.setText(mHeartRate.format("%2f"));
        if (zone < hiliteZone) {
@@ -258,6 +265,12 @@ hiliteZone = 1;
           value.setColor(zoneFgColor);
        }
        value.draw(dc);
+*/
+
+/*
+textC(dc, value.locX, value.locY,Gfx.FONT_NUMBER_HOT, toStr(mHeartRate));
+*/
+       background.draw(dc,toStr(mHeartRate));
     }
 
 //   /*-------------------------------------------------------------------------
@@ -314,6 +327,15 @@ hiliteZone = 1;
          return "" + o;
       } else {
          return "---";
+      }
+   }
+
+   /*-------------------------------------------------------------------------
+    *------------------------------------------------------------------------*/
+   function textC(dc, x, y, font, s) {
+      if (s != null) {
+//         dc.drawText(x, y, font, s, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+         dc.drawText(x, y, font, s, Graphics.TEXT_JUSTIFY_CENTER);
       }
    }
 
