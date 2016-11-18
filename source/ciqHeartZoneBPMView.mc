@@ -51,11 +51,11 @@ class ciqHeartZoneBPMView extends Ui.DataField
    hidden var zoneBgColor;
    hidden var zoneFgColor;
 
-   /** drawable for background */
-   hidden var background;
+   /** drawable */
+   hidden var painter;
 
    /** drawable for value */
-   hidden var value;
+   hidden var value; //TODO rm
 
    /*-------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
@@ -173,8 +173,8 @@ class ciqHeartZoneBPMView extends Ui.DataField
       
 //      Sys.println("layout: " + layout);
       
-      background = View.findDrawableById("Background");
-      background.normalize(width,height);
+      painter = View.findDrawableById("Painter");
+      painter.normalize(width,height);
 
       value = View.findDrawableById("value");
       
@@ -228,15 +228,15 @@ hiliteZone = 1;
         * Draw backdrop. If below the hilite zone, fill with the default bg
         * color, and draw text with default fg color.
         */
-//       if (background != null) {
-//          background.setBorderColor(zoneBgColor);
+//       if (painter != null) {
+//          painter.setBorderColor(zoneBgColor);
 //          if (zone < hiliteZone) {
-//             background.setBackColor(defaultBgColor);
+//             painter.setBackColor(defaultBgColor);
 //          }
 //          else {
-//             background.setBackColor(zoneBgColor);
+//             painter.setBackColor(zoneBgColor);
 //          }
-//          background.draw(dc);
+//          painter.draw(dc);
 //       }
        
        /*
@@ -270,7 +270,7 @@ hiliteZone = 1;
 /*
 textC(dc, value.locX, value.locY,Gfx.FONT_NUMBER_HOT, toStr(mHeartRate));
 */
-       background.draw(dc,toStr(mHeartRate));
+       painter.draw(dc,toStr(mHeartRate));
     }
 
 //   /*-------------------------------------------------------------------------

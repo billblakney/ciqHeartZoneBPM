@@ -1,7 +1,7 @@
 <layouts>
     <!-- A generic, centered layout. -->
     <layout id="All">
-        <drawable id="Background" class="Background" >
+        <drawable id="Painter" class="Painter" >
         	<param name="x">"center"</param>
         	<param name="y">"center"</param>
         	<param name="font">Gfx.FONT_NUMBER_THAI_HOT</param>

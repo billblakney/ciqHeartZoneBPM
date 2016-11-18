@@ -1,9 +1,6 @@
 using Toybox.WatchUi as Ui;
-//using Toybox.Application as App;
-//using Toybox.Graphics as Gfx;
-//using Toybox.System as Sys;
 
-class Background extends Ui.Drawable {
+class Painter extends Ui.Drawable {
 
 //    hidden var mBackColor;
 //    hidden var mBorderColor;
@@ -16,7 +13,7 @@ class Background extends Ui.Drawable {
         Drawable.initialize(params);
 
 //        var dictionary = {
-//            :identifier => "Background"
+//            :identifier => "Painter"
 //        };
 
         mX = params.get(:x);
