@@ -6,8 +6,6 @@
         	<param name="x">"center"</param>
         	<param name="y">"center"</param>
         	<param name="font">Gfx.FONT_NUMBER_THAI_HOT</param>
-        	<param name="bar_mode">2</param>
-        	<param name="bar_height">30</param>
         </drawable>
     </layout>
 
@@ -16,8 +14,6 @@
         	<param name="x">"center"</param>
         	<param name="y">"center"</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
-        	<param name="bar_mode">1</param>
-        	<param name="bar_height">15</param>
         </drawable>
     </layout>
 
@@ -26,8 +22,6 @@
         	<param name="x">"center"</param>
         	<param name="y">"center"</param>
 	        <param name="font">Gfx.FONT_NUMBER_HOT</param>
-        	<param name="bar_mode">0</param>
-        	<param name="bar_height">15</param>
         </drawable>
     </layout>
 
@@ -36,7 +30,6 @@
         	<param name="x">"center"</param>
         	<param name="y">"center"</param>
         	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
-        	<param name="bar_mode">1</param>
         </drawable>
     </layout>
     
@@ -45,7 +38,6 @@
         	<param name="x">"center"</param>
         	<param name="y">"center"</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
-        	<param name="bar_mode">2</param>
         </drawable>
     </layout>
     
@@ -54,7 +46,6 @@
         	<param name="x">"center"</param>
         	<param name="y">"center"</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
-        	<param name="bar_mode">2</param>
         </drawable>
     </layout>
     
@@ -64,7 +55,6 @@
         	<param name="x">48</param>
         	<param name="y">"center"</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
-        	<param name="bar_mode">2</param>
         </drawable>
     </layout>
     
@@ -73,7 +63,6 @@
         	<param name="x">"center"</param>
         	<param name="y">"center"</param>
 	        <param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
-        	<param name="bar_mode">0</param>
         </drawable>
     </layout>
 </layouts>

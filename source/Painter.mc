@@ -35,7 +35,7 @@ class Painter extends Ui.Drawable {
            mBarMode = params.get(:bar_mode);
         }
         else {
-           mBarMode = 0;
+           mBarMode = 2;
         }
         
         if (params.hasKey(:bar_height)) {
@@ -52,7 +52,7 @@ class Painter extends Ui.Drawable {
        mHeight = height;
        
        if (mBarHeight == 0) {
-          mBarHeight = height/10;
+          mBarHeight = 0.15 * height;
        }
        
        if (mX.equals("center")) {
@@ -74,7 +74,7 @@ class Painter extends Ui.Drawable {
           dc.fillRectangle(0,0,mWidth,mBarHeight);
        }
        if (mBarMode != 1) {
-          dc.fillRectangle(0,mHeight-mBarHeight,mWidth,mBarHeight);
+          dc.fillRectangle(0,mHeight-mBarHeight+1,mWidth,mBarHeight);
        }
     }
 

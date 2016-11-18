@@ -36,7 +36,7 @@
     <layout id="MidThird">
         <drawable id="Painter" class="Painter" >
         	<param name="x">"center"</param>
-        	<param name="y">"center"</param>
+        	<param name="y">33</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
@@ -44,7 +44,7 @@
     <layout id="LeftMidThird">
         <drawable id="Painter" class="Painter" >
         	<param name="x">"center"</param>
-        	<param name="y">"center"</param>
+        	<param name="y">33</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
@@ -52,7 +52,7 @@
     <layout id="RightMidThird">
         <drawable id="Painter" class="Painter" >
         	<param name="x">"center"</param>
-        	<param name="y">"center"</param>
+        	<param name="y">33</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
@@ -68,7 +68,7 @@
     <layout id="TopLeftQuad"> <!-- center is 54,24 -->
         <drawable id="Painter" class="Painter" >
         	<param name="x">60</param>
-        	<param name="y">62</param>
+        	<param name="y">56</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
@@ -76,7 +76,7 @@
     <layout id="TopRightQuad"> <!-- center is 54,24 -->
         <drawable id="Painter" class="Painter" >
         	<param name="x">38</param>
-        	<param name="y">62</param>
+        	<param name="y">56</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
@@ -84,7 +84,7 @@
     <layout id="BotLeftQuad"> <!-- center is 54,24 -->
         <drawable id="Painter" class="Painter" >
         	<param name="x">60</param>
-        	<param name="y">38</param>
+        	<param name="y">44</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
@@ -92,7 +92,7 @@
     <layout id="BotRightQuad"> <!-- center is 54,24 -->
         <drawable id="Painter" class="Painter" >
         	<param name="x">38</param>
-        	<param name="y">38</param>
+        	<param name="y">44</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
