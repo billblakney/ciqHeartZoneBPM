@@ -234,9 +234,16 @@ hiliteZone = 1;
         * Draw the display.
         */
 //       painter.draw(dc,toStr(mHeartRate));
+
+// zone bar
        painter.drawBackground(dc,defaultBgColor);
        painter.drawZoneBar(dc,zoneBgColor);
        painter.drawText(dc,defaultFgColor,toStr(mHeartRate));
+
+// rounded rect
+//       painter.drawBackground(dc,zoneBgColor);
+//       painter.drawTextBg(dc,defaultBgColor,toStr(mHeartRate));
+//       painter.drawText(dc,defaultFgColor,toStr(mHeartRate));
     }
 
 //   /*-------------------------------------------------------------------------
