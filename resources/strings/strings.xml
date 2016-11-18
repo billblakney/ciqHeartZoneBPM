@@ -3,8 +3,8 @@
     <!-- -->
     <!-- lowest hilite zone title -->
     <!-- -->
-    <string id="HiliteZone">Lowest Color Zone</string>
-    <string id="PromptHiliteZone">Zone at which HR field gets colored</string>
+    <string id="HiliteZone">Lowest Full Color Zone</string>
+    <string id="PromptHiliteZone">Lowest zone for full background coloring</string>
     <!-- -->
     <!--   > zone colors -->
     <!-- -->
