@@ -233,7 +233,10 @@ hiliteZone = 1;
        /*
         * Draw the display.
         */
-       painter.draw(dc,toStr(mHeartRate));
+//       painter.draw(dc,toStr(mHeartRate));
+       painter.drawBackground(dc,defaultBgColor);
+       painter.drawZoneBar(dc,zoneBgColor);
+       painter.drawText(dc,defaultFgColor,toStr(mHeartRate));
     }
 
 //   /*-------------------------------------------------------------------------
