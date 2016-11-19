@@ -177,8 +177,14 @@ class HeartZoneBPMView extends Ui.DataField
 
        // Get zone and zone colors.
        zone = getZone(mHeartRate);
-       zoneBgColor = zoneColors[2*(zone-1)];
-       zoneFgColor = zoneColors[2*(zone-1)+1];
+       if (zone > 0) {
+          zoneBgColor = zoneColors[2*(zone-1)];
+          zoneFgColor = zoneColors[2*(zone-1)+1];
+       }
+       else {
+          zoneBgColor = defaultBgColor;
+          zoneFgColor = defaultFgColor;
+       }
 
        //Sys.println("zone,bg,fg: "
        //   + zone + "," + zoneBgColor + "," + zoneFgColor);
