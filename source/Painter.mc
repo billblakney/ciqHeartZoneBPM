@@ -4,14 +4,14 @@ using Toybox.Graphics as Gfx;
 /*
  * Draws the elements of the canvas for HeartZoneBMApp.
  * 
- * Dictionary paramaters:
+ * This drawable uses the following params:
  * x - horizontal center for drawing text
  * y - vertical center for drawing text
- * width - width of canvas
- * height - height of canvas
  * font - font for text
  * bar_mode - zone bar placement (see below)
  * bar_height - height of zone strip
+ * 
+ * The x, y, and font params are required. Others are optional.
  * 
  * bar_mode takes one of three values. Value 2 is the default
  *    0 - Paint bar on bottom of the field
