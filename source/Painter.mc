@@ -1,6 +1,26 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 
+/*
+ * Draws the elements of the canvas for HeartZoneBMApp.
+ * 
+ * Dictionary paramaters:
+ * x - horizontal center for drawing text
+ * y - vertical center for drawing text
+ * width - width of canvas
+ * height - height of canvas
+ * font - font for text
+ * bar_mode - zone bar placement (see below)
+ * bar_height - height of zone strip
+ * 
+ * bar_mode takes one of three values. Value 2 is the default
+ *    0 - Paint bar on bottom of the field
+ *    1 - Paint bar on top of the field
+ *    2 - Paint bar on bottom and top of the field
+ *    
+ *  If bar_height is not specified, it is computed as a fraction of the
+ *  text height.
+ */
 class Painter extends Ui.Drawable {
 
     hidden var mX;
@@ -8,10 +28,14 @@ class Painter extends Ui.Drawable {
     hidden var mWidth;
     hidden var mHeight;
     hidden var mFont;
-    hidden var mBottom;
     hidden var mBarMode;
     hidden var mBarHeight;
 
+   /*-------------------------------------------------------------------------
+    * Initialize the params.
+    * The x, y, and font values are required. Others are optional; default
+    * default values are set for params not in the params dictionary.
+    *------------------------------------------------------------------------*/
     function initialize(params)
     {
         Drawable.initialize(params);
@@ -19,13 +43,6 @@ class Painter extends Ui.Drawable {
         mX = params.get(:x);
         mY = params.get(:y);
         mFont = params.get(:font);
-        
-        if (params.hasKey("top")) {
-           mBottom = false;
-        }
-        else {
-           mBottom = true;
-        }
         
         if (params.hasKey(:bar_mode)) {
            mBarMode = params.get(:bar_mode);
@@ -42,6 +59,11 @@ class Painter extends Ui.Drawable {
         }
     }
     
+   /*-------------------------------------------------------------------------
+    * Compute values that are dependent on the field dimensions.
+    * This method should be called after initialize, but before any of the
+    * "draw" methods are called.
+    *------------------------------------------------------------------------*/
     function normalize(width,height) {
        
        mWidth = width;
@@ -59,11 +81,17 @@ class Painter extends Ui.Drawable {
        }
     }
 
+   /*-------------------------------------------------------------------------
+    * Fills the background with a specified color.
+    *------------------------------------------------------------------------*/
     function drawBackground(dc,color) {
        dc.setColor(color,color);
        dc.clear();
     }
 
+   /*-------------------------------------------------------------------------
+    * Draws the zone bar(s) according to the specified color.
+    *------------------------------------------------------------------------*/
     function drawZoneBar(dc,color) {
        dc.setColor(color,color);
        if (mBarMode >= 1) {
@@ -74,6 +102,9 @@ class Painter extends Ui.Drawable {
        }
     }
 
+   /*-------------------------------------------------------------------------
+    * Draws text in the specified color.
+    *------------------------------------------------------------------------*/
     function drawText(dc,color,txt) {
        dc.setColor(color,Gfx.COLOR_TRANSPARENT);
        dc.drawText(mX, mY, mFont, txt, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
