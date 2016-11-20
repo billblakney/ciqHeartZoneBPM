@@ -1,9 +1,53 @@
 <!-- layouts for rectangular-205x148 -->
 <layouts>
 
-    <!-- layout All uses default -->
-    <!-- layout TopThird uses default -->
-    <!-- layout MidThird uses default -->
-    <!-- layout BotThird uses default -->
+    <layout id="All">
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_THAI_HOT</param>
+        	<param name="bar_height">30</param>
+        </drawable>
+    </layout>
+
+    <layout id="TopHalf">
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
+        	<param name="bar_mode">2</param>
+        	<param name="bar_height">15</param>
+        </drawable>
+    </layout>
+
+    <layout id="TopThird">
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">27</param>
+        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
+        	<param name="bar_mode">1</param>
+        	<param name="bar_height">10</param>
+        </drawable>
+    </layout>
+
+    <layout id="MidThird">
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">24</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        	<param name="bar_mode">0</param>
+        	<param name="bar_height">14</param>
+        </drawable>
+    </layout>
+
+    <layout id="BotThird">
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">18</param>
+        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
+        	<param name="bar_mode">0</param>
+        	<param name="bar_height">10</param>
+        </drawable>
+    </layout>
 
 </layouts>
