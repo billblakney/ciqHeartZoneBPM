@@ -1,6 +1,6 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
-//using Toybox.System as Sys;
+using Toybox.System as Sys;
 using Toybox.UserProfile as Profile;
 using Toybox.Application as App;
 
@@ -149,14 +149,17 @@ class HeartZoneBPMView extends Ui.DataField
     *------------------------------------------------------------------------*/
    function onLayout(dc)
    {
+hiliteZone = 6; //TODO rm
       var width = dc.getWidth();
       var height = dc.getHeight();
       var obscurityFlags = DataField.getObscurityFlags();
       
       setLayout(dc,width,height,obscurityFlags);
+//      var layout = setLayout(dc,width,height,obscurityFlags);
 //      Sys.println("layout: " + layout);
       
       painter = View.findDrawableById("Painter");
+      Sys.println("painter: " + painter);
       painter.normalize(width,height);
       
       return true;
@@ -202,11 +205,11 @@ class HeartZoneBPMView extends Ui.DataField
        if (zone < hiliteZone) {
           painter.drawBackground(dc,defaultBgColor);
           painter.drawZoneBar(dc,zoneBgColor);
-          painter.drawText(dc,defaultFgColor,toStr(mHeartRate));
+          painter.drawText(dc,defaultFgColor,defaultBgColor,toStr(mHeartRate));
        }
        else {
           painter.drawBackground(dc,zoneBgColor);
-          painter.drawText(dc,zoneFgColor,toStr(mHeartRate));
+          painter.drawText(dc,zoneFgColor,zoneBgColor,toStr(mHeartRate));
        }
     }
 
@@ -338,19 +341,19 @@ class HeartZoneBPMView extends Ui.DataField
       if (id == 15395 /*fr*/ || id == 15436 /*fx*/) {
             View.setLayout(Rez.Layouts.All(dc));
       }
-      else if (id == 7304 /*fr*/ || id == 7326 /*fx*/) {
+      else if (id == 7304 /*fr*/ || id == 7326 /*fx*/ || id == 278) {
             View.setLayout(Rez.Layouts.TopHalf(dc));
       }
       else if (id == 13304 /*fr*/ || id == 13326 /*fx*/) {
             View.setLayout(Rez.Layouts.BotHalf(dc));
       }
-      else if (id == 7270 /*fr*/ || id == 7288 /*fx*/) {
+      else if (id == 7270 /*fr*/ || id == 7288 /*fx*/ || id == 248 /*va*/) {
             View.setLayout(Rez.Layouts.TopThird(dc));
       }
-      else if (id == 5281 /*fr*/ || id == 5292 /*fx*/) {
+      else if (id == 5281 /*fr*/ || id == 5292 /*fx*/ || id == 262 /*va*/) {
             View.setLayout(Rez.Layouts.MidThird(dc));
       }
-      else if (id == 13270 /*fr*/ || id == 13288 /*fx*/) {
+      else if (id == 13270 /*fr*/ || id == 13288 /*fx*/ || id == 249 /*va*/) {
             View.setLayout(Rez.Layouts.BotThird(dc));
       }
       else if (id == 1173 /*fr*/ || id == 1182 /*fx*/) {

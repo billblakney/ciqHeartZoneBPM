@@ -1,38 +1,5 @@
 <!-- layouts for round-218x218 -->
 <layouts>
-
-    <layout id="All">
-        <drawable id="Painter" class="Painter" >
-        	<param name="x">"center"</param>
-        	<param name="y">"center"</param>
-        	<param name="font">Gfx.FONT_NUMBER_THAI_HOT</param>
-        </drawable>
-    </layout>
-
-    <layout id="TopHalf">
-        <drawable id="Painter" class="Painter" >
-        	<param name="x">"center"</param>
-        	<param name="y">"center"</param>
-        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
-        </drawable>
-    </layout>
-
-    <layout id="BotHalf">
-        <drawable id="Painter" class="Painter" >
-        	<param name="x">"center"</param>
-        	<param name="y">"center"</param>
-        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
-        </drawable>
-    </layout>
-
-    <layout id="TopThird">
-        <drawable id="Painter" class="Painter" >
-        	<param name="x">"center"</param>
-        	<param name="y">"center"</param>
-        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
-        </drawable>
-    </layout>
-
     <layout id="MidThird">
         <drawable id="Painter" class="Painter" >
         	<param name="x">"center"</param>
@@ -40,59 +7,31 @@
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
-
-    <layout id="LeftMidThird">
+    <layout id="TopLeftQuad">
         <drawable id="Painter" class="Painter" >
-        	<param name="x">"center"</param>
-        	<param name="y">33</param>
-        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
-        </drawable>
-    </layout>
-
-    <layout id="RightMidThird">
-        <drawable id="Painter" class="Painter" >
-        	<param name="x">"center"</param>
-        	<param name="y">33</param>
-        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
-        </drawable>
-    </layout>
-
-    <layout id="BotThird">
-        <drawable id="Painter" class="Painter" >
-        	<param name="x">"center"</param>
+        	<param name="x">65</param>
         	<param name="y">"center"</param>
-        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
-        </drawable>
-    </layout>
-
-    <layout id="TopLeftQuad"> <!-- center is 54,24 -->
-        <drawable id="Painter" class="Painter" >
-        	<param name="x">60</param>
-        	<param name="y">56</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
-
-    <layout id="TopRightQuad"> <!-- center is 54,24 -->
+    <layout id="TopRightQuad">
         <drawable id="Painter" class="Painter" >
-        	<param name="x">38</param>
-        	<param name="y">56</param>
+        	<param name="x">39</param>
+        	<param name="y">"center"</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
-
-    <layout id="BotLeftQuad"> <!-- center is 54,24 -->
+    <layout id="BotLeftQuad">
         <drawable id="Painter" class="Painter" >
-        	<param name="x">60</param>
-        	<param name="y">44</param>
+        	<param name="x">65</param>
+        	<param name="y">49</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>
-
-    <layout id="BotRightQuad"> <!-- center is 54,24 -->
+    <layout id="BotRightQuad">
         <drawable id="Painter" class="Painter" >
-        	<param name="x">38</param>
-        	<param name="y">44</param>
+        	<param name="x">39</param>
+        	<param name="y">49</param>
         	<param name="font">Gfx.FONT_NUMBER_HOT</param>
         </drawable>
     </layout>

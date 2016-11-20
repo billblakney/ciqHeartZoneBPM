@@ -105,8 +105,9 @@ class Painter extends Ui.Drawable {
    /*-------------------------------------------------------------------------
     * Draws text in the specified color.
     *------------------------------------------------------------------------*/
-    function drawText(dc,color,txt) {
-       dc.setColor(color,Gfx.COLOR_TRANSPARENT);
+    function drawText(dc,fgColor,bgColor,txt) {
+//       dc.setColor(fgColor,bgColor);
+       dc.setColor(fgColor,Gfx.COLOR_TRANSPARENT);
        dc.drawText(mX, mY, mFont, txt, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
     }
 }

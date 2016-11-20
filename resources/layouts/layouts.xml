@@ -8,36 +8,80 @@
         </drawable>
     </layout>
     <layout id="TopHalf">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
     <layout id="BotHalf">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
     <layout id="TopThird">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
+        </drawable>
     </layout>
     <layout id="MidThird">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
     <layout id="LeftMidThird">
-        <label id="value" x="60" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
     <layout id="RightMidThird">
-        <label id="value" x="40" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_HOT" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
     <layout id="BotThird">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_MEDIUM</param>
+        </drawable>
     </layout>
     <layout id="TopLeftQuad">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
     <layout id="TopRightQuad">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
     <layout id="BotLeftQuad">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
     <layout id="BotRightQuad">
-        <label id="value" x="center" y="center" color="Gfx.COLOR_WHITE" justification="Gfx.TEXT_JUSTIFY_CENTER" font="Gfx.FONT_NUMBER_MEDIUM" />
+        <drawable id="Painter" class="Painter" >
+        	<param name="x">"center"</param>
+        	<param name="y">"center"</param>
+        	<param name="font">Gfx.FONT_NUMBER_HOT</param>
+        </drawable>
     </layout>
 </layouts>
