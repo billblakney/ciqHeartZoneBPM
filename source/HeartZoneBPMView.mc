@@ -1,6 +1,6 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
-using Toybox.System as Sys;
+//using Toybox.System as Sys;
 using Toybox.UserProfile as Profile;
 using Toybox.Application as App;
 
@@ -159,7 +159,7 @@ hiliteZone = 6; //TODO rm
 //      Sys.println("layout: " + layout);
       
       painter = View.findDrawableById("Painter");
-      Sys.println("painter: " + painter);
+//      Sys.println("painter: " + painter);
       painter.normalize(width,height);
       
       return true;
